@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0d1b2a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="گره‌بان">
+<meta name="application-name" content="گره‌بان">
+<meta name="description" content="نقشه‌خوان فرش برای بافندگان — با پشتیبانی صوتی">
+<link rel="manifest" href='data:application/manifest+json,{"name":"نقشه‌خوان گره‌بان","short_name":"گره‌بان","description":"نقشه‌خوان فرش برای بافندگان","start_url":".","scope":".","display":"standalone","orientation":"portrait","background_color":"%230d1b2a","theme_color":"%231a5490","lang":"fa","dir":"rtl","icons":[{"src":"data:image/svg%2Bxml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22%3E%3Crect width=%22192%22 height=%22192%22 rx=%2236%22 fill=%22%231a5490%22/%3E%3Ctext x=%2296%22 y=%22130%22 font-size=%22110%22 text-anchor=%22middle%22%3E%F0%9F%A7%B6%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml","purpose":"any maskable"},{"src":"data:image/svg%2Bxml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 rx=%2296%22 fill=%22%231a5490%22/%3E%3Ctext x=%22256%22 y=%22350%22 font-size=%22300%22 text-anchor=%22middle%22%3E%F0%9F%A7%B6%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]}'>
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="%231a5490"/><text x="96" y="130" font-size="110" text-anchor="middle">🧶</text></svg>'>
+<link rel="apple-touch-icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="%231a5490"/><text x="96" y="130" font-size="110" text-anchor="middle">🧶</text></svg>'>
+<title>نقشه‌خوان گره‌بان</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;font-family:'Vazirmatn','Segoe UI',Tahoma,sans-serif;background:#0a1220;color:#e8eef7;font-size:16px;user-select:none;direction:rtl;}
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh;}
+header{background:linear-gradient(135deg,#1a5490 0%,#2980b9 100%);padding:8px 12px;display:flex;align-items:center;gap:8px;box-shadow:0 2px 10px rgba(0,0,0,0.4);flex-shrink:0;position:relative;z-index:10;}
+header .logo{font-size:20px;}
+header .meta{flex:1;min-width:0;}
+header .title{font-size:13px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+header .subtitle{font-size:10px;opacity:0.8;margin-top:1px;}
+header .btn-ico{background:rgba(255,255,255,0.15);border:none;color:#fff;width:38px;height:38px;border-radius:10px;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0;position:relative;}
+header .btn-ico:active{background:rgba(255,255,255,0.35);transform:scale(0.94);}
+header .btn-ico.voice-on{background:linear-gradient(135deg,#27ae60,#2ecc71);box-shadow:0 0 0 2px rgba(46,204,113,0.5), 0 0 18px rgba(46,204,113,0.7);animation:voiceGlow 1.8s ease-in-out infinite;}
+header .btn-ico.voice-on::after{content:"";position:absolute;top:-2px;right:-2px;width:10px;height:10px;background:#f39c12;border-radius:50%;border:2px solid #fff;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+@keyframes voiceGlow{0%,100%{box-shadow:0 0 0 2px rgba(46,204,113,0.5),0 0 18px rgba(46,204,113,0.5);}50%{box-shadow:0 0 0 2px rgba(46,204,113,0.8),0 0 24px rgba(46,204,113,0.9);}}
+main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
+.welcome{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;height:100%;gap:16px;overflow-y:auto;}
+.welcome .hero{font-size:72px;filter:drop-shadow(0 6px 18px rgba(52,152,219,0.5));animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.welcome h1{font-size:20px;color:#fff;font-weight:700;}
+.welcome p{font-size:12px;color:#7a90a8;max-width:300px;line-height:1.8;text-align:center;}
+.welcome .steps{background:linear-gradient(135deg,rgba(52,152,219,0.12),rgba(52,152,219,0.05));border-right:3px solid #3498db;border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.9;color:#b0c2d6;max-width:320px;text-align:right;}
+.welcome .steps strong{color:#5dade2;}
+.welcome .steps b{color:#2ecc71;}
+.big-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:16px 28px;border-radius:14px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 5px 18px rgba(39,174,96,0.4);display:inline-flex;align-items:center;gap:10px;transition:all 0.15s;}
+.big-btn:active{transform:translateY(2px);box-shadow:0 3px 10px rgba(39,174,96,0.4);}
+.big-btn.secondary{background:linear-gradient(135deg,#34495e,#4a6072);box-shadow:0 4px 14px rgba(52,73,94,0.4);}
+.big-btn.small{padding:10px 18px;font-size:13px;min-height:auto;}
+.big-btn.install-btn{background:linear-gradient(135deg,#8e44ad,#9b59b6);box-shadow:0 5px 18px rgba(142,68,173,0.45);animation:installPulse 2s infinite;}
+@keyframes installPulse{0%,100%{box-shadow:0 5px 18px rgba(142,68,173,0.45);}50%{box-shadow:0 5px 28px rgba(142,68,173,0.75);}}
+.stored-dkb-banner{background:linear-gradient(135deg,#0f3620,#1a5c38);border:2px solid #2ecc71;border-radius:12px;padding:12px 16px;font-size:12px;line-height:1.8;color:#a8e6b8;max-width:340px;text-align:right;width:100%;}
+.stored-dkb-banner strong{color:#2ecc71;display:block;margin-bottom:6px;font-size:13px;}
+.stored-dkb-banner .row{display:flex;gap:8px;margin-top:10px;}
+.stored-dkb-banner button{flex:1;padding:10px 8px;border:none;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;}
+.stored-dkb-banner .btn-use{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;}
+.stored-dkb-banner .btn-change{background:rgba(255,255,255,0.15);color:#fff;}
+#knitView{display:none;flex:1;flex-direction:column;overflow:hidden;min-height:0;}
+.map-panel{background:#050a14;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;padding:4px;height:28vh;max-height:280px;min-height:120px;overflow:hidden;position:relative;border-bottom:2px solid #1a5490;}
+.map-scroll{overflow:auto;max-width:100%;max-height:100%;border-radius:6px;display:flex;justify-content:center;align-items:center;}
+canvas{display:block;image-rendering:pixelated;border-radius:4px;}
+.row-stats-bar{background:linear-gradient(90deg,#0f2536,#1a3550);padding:6px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-shrink:0;border-bottom:1px solid #1a5490;font-size:11px;}
+.row-stats-bar .stat{display:flex;align-items:baseline;gap:4px;color:#7a90a8;font-weight:600;}
+.row-stats-bar .stat .lbl{font-size:9px;opacity:0.75;}
+.row-stats-bar .stat .val{color:#5dade2;font-size:14px;font-weight:900;font-variant-numeric:tabular-nums;}
+.row-stats-bar .stat .tot{color:#4a6072;font-size:10px;}
+.row-stats-bar .stat.green .val{color:#2ecc71;}
+.row-stats-bar .stat.orange .val{color:#f39c12;}
+.fields-area{padding:8px 10px 4px;background:#0d1b2a;display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.field-row{display:grid;grid-template-columns:52px 1fr 52px;gap:6px;align-items:stretch;}
+.field-row.no-nav{grid-template-columns:52px 1fr 52px;}
+.field-row.no-nav .ph{visibility:hidden;}
+.nav-btn{background:linear-gradient(160deg,#1a2a40,#152437);border:1px solid rgba(52,152,219,0.25);color:#e8eef7;border-radius:12px;font-size:20px;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;min-height:56px;transition:all 0.12s;box-shadow:0 2px 6px rgba(0,0,0,0.3);font-weight:700;}
+.nav-btn:active:not(:disabled){background:linear-gradient(160deg,#1a5490,#2980b9);border-color:#3498db;transform:translateY(1px);}
+.nav-btn:disabled{opacity:0.25;cursor:not-allowed;}
+.field-input-wrap{background:linear-gradient(160deg,#132437,#0e1d2c);border:2px solid transparent;border-radius:14px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:5px 12px 5px 8px;box-shadow:0 2px 8px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.03);transition:all 0.2s;min-height:56px;}
+.field-input-wrap.row-f{border-color:rgba(93,173,226,0.35);}
+.field-input-wrap.color-f{border-color:rgba(243,156,18,0.35);}
+.field-input-wrap.knot-f{border-color:rgba(46,204,113,0.35);}
+.field-input-wrap .lbl{font-size:11px;font-weight:800;color:#7a90a8;letter-spacing:2px;text-transform:uppercase;min-width:36px;text-align:right;}
+.field-input-wrap.row-f .lbl{color:#5dade2;}
+.field-input-wrap.color-f .lbl{color:#f39c12;}
+.field-input-wrap.knot-f .lbl{color:#2ecc71;}
+.field-input-wrap input{background:transparent;border:none;color:#fff;font-family:inherit;font-size:28px;font-weight:900;text-align:center;font-variant-numeric:tabular-nums;outline:none;min-width:0;width:100%;padding:0;direction:ltr;letter-spacing:-1px;}
+.field-input-wrap.row-f input{color:#5dade2;}
+.field-input-wrap.color-f input{color:#f39c12;}
+.field-input-wrap.knot-f input{color:#2ecc71;font-size:24px;}
+.field-input-wrap input::placeholder{color:rgba(255,255,255,0.35);font-weight:400;font-size:18px;}
+.field-input-wrap input::-webkit-outer-spin-button,.field-input-wrap input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.field-input-wrap input[type=number]{-moz-appearance:textfield;}
+.field-input-wrap .swatch{width:30px;height:30px;border-radius:8px;border:2px solid rgba(255,255,255,0.25);box-shadow:0 2px 6px rgba(0,0,0,0.4);flex-shrink:0;background:#fff;}
+.field-input-wrap .sub-info{font-size:10px;color:#7a90a8;min-width:40px;text-align:left;font-weight:700;white-space:nowrap;opacity:0.85;}
+.field-input-wrap.changed{animation:pop 0.4s ease;}
+@keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.04);}100%{transform:scale(1);}}
+.progress-wrap{height:4px;background:rgba(0,0,0,0.5);flex-shrink:0;position:relative;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#2ecc71 0%,#27ae60 100%);width:0%;transition:width 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 12px rgba(46,204,113,0.6);}
+.progress-info{display:flex;justify-content:space-between;padding:4px 12px 0;font-size:10px;color:#7a90a8;background:#0a1622;flex-shrink:0;font-variant-numeric:tabular-nums;}
+.nav-main{display:grid;grid-template-columns:1fr 1.3fr;gap:10px;padding:8px 10px calc(10px + env(safe-area-inset-bottom));background:#0a1220;flex-shrink:0;}
+.nav-main button{color:#fff;border:none;padding:14px 8px;border-radius:14px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-height:54px;transition:all 0.15s;box-shadow:0 4px 14px rgba(0,0,0,0.35);}
+.nav-main button:active:not(:disabled){transform:translateY(2px);filter:brightness(1.15);}
+.nav-main button:disabled{opacity:0.25;cursor:not-allowed;}
+.nav-main button .ico{font-size:20px;line-height:1;}
+.nav-main button.prev{background:linear-gradient(135deg,#34495e,#4a6072);}
+.nav-main button.next{background:linear-gradient(135deg,#27ae60,#2ecc71);box-shadow:0 5px 20px rgba(39,174,96,0.45);}
+.nav-main button.next:not(:disabled){animation:pulseNext 2.5s infinite;}
+@keyframes pulseNext{0%,100%{box-shadow:0 5px 20px rgba(39,174,96,0.45);}50%{box-shadow:0 5px 26px rgba(39,174,96,0.75);}}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.modal.show{display:flex;animation:fadeIn 0.2s;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal-content{background:linear-gradient(160deg,#132437,#0d1b2a);border-radius:16px;padding:20px;max-width:460px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.8);border:1px solid rgba(52,152,219,0.3);animation:slideUp 0.25s;}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal-content h2{margin:0 0 14px;font-size:16px;color:#fff;border-bottom:2px solid #3498db;padding-bottom:8px;font-weight:700;}
+.modal-content p{font-size:12px;color:#b0c2d6;line-height:1.9;margin:0 0 14px;}
+.modal-content code{background:#000;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11px;direction:ltr;display:inline-block;}
+.modal-actions{display:flex;gap:8px;}
+.modal-actions button{flex:1;padding:12px;border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;color:#fff;transition:all 0.15s;}
+.modal-actions .cancel{background:#34495e;}
+.modal-actions .ok{background:linear-gradient(135deg,#27ae60,#2ecc71);box-shadow:0 3px 10px rgba(39,174,96,0.4);}
+.palette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin-bottom:14px;}
+.pal-item{background:#0a1220;border-radius:10px;padding:8px;text-align:center;cursor:pointer;border:2px solid transparent;transition:all 0.2s;}
+.pal-item:active{border-color:#3498db;transform:scale(0.96);}
+.pal-swatch{width:100%;height:42px;border-radius:8px;margin-bottom:6px;box-shadow:inset 0 -3px 8px rgba(0,0,0,0.2),0 2px 6px rgba(0,0,0,0.3);}
+.pal-num{font-size:12px;font-weight:700;color:#fff;}
+.voice-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#0a1220;border-radius:10px;margin-bottom:10px;border:1px solid rgba(52,152,219,0.15);gap:10px;}
+.voice-row label{font-size:13px;color:#e8eef7;font-weight:700;}
+.voice-row .hint{font-size:10px;color:#7a90a8;margin-top:2px;font-weight:400;}
+.voice-row select{background:#0d1b2a;color:#fff;border:1px solid #1a5490;border-radius:8px;padding:7px 10px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;min-width:130px;}
+.voice-row input[type=range]{width:120px;accent-color:#27ae60;}
+.voice-row .range-val{display:inline-block;min-width:32px;text-align:center;font-weight:800;color:#27ae60;font-size:13px;}
+.voice-info-box{padding:10px 12px;background:#0f2536;border:1px solid rgba(52,152,219,0.3);border-radius:10px;color:#b0c2d6;font-size:12px;line-height:1.9;margin-bottom:12px;}
+.voice-info-box strong{color:#5dade2;}
+.voice-info-box.ok{background:#0f3620;border-color:rgba(46,204,113,0.3);color:#a8e6b8;}
+.voice-info-box.warn{background:#3a2b0f;border-color:#7d5a17;color:#ffd166;}
+.switch{position:relative;display:inline-block;width:52px;height:28px;flex-shrink:0;}
+.switch input{opacity:0;width:0;height:0;}
+.switch .slider{position:absolute;cursor:pointer;inset:0;background:#34495e;transition:.3s;border-radius:28px;}
+.switch .slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background:#fff;transition:.3s;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,0.3);}
+.switch input:checked + .slider{background:linear-gradient(135deg,#27ae60,#2ecc71);}
+.switch input:checked + .slider:before{transform:translateX(24px);}
+#fullMap{display:none;position:fixed;inset:0;background:#000;z-index:2000;flex-direction:column;}
+#fullMap.show{display:flex;}
+#fullMap .fm-header{background:linear-gradient(135deg,#1a5490,#2980b9);padding:12px;display:flex;align-items:center;gap:8px;}
+#fullMap .fm-header h3{margin:0;font-size:15px;color:#fff;flex:1;font-weight:700;}
+#fullMap .fm-header button{background:rgba(255,255,255,0.2);border:none;color:#fff;padding:9px 14px;border-radius:9px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;}
+#fullMap .fm-body{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:12px;}
+.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-30px);background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;padding:10px 22px;border-radius:12px;font-size:13px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.5);z-index:3000;opacity:0;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.err{background:linear-gradient(135deg,#e74c3c,#c0392b);}
+.loader{display:none;position:fixed;inset:0;background:rgba(10,18,32,0.98);z-index:2500;align-items:center;justify-content:center;flex-direction:column;gap:20px;}
+.loader.show{display:flex;}
+.loader .spinner{width:52px;height:52px;border:4px solid #1a5490;border-top-color:#3498db;border-radius:50%;animation:spin 0.9s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loader .msg{font-size:14px;color:#b0c2d6;font-weight:600;}
+.headphone-badge{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom));left:14px;background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(142,68,173,0.5);z-index:500;display:none;align-items:center;gap:6px;animation:badgePulse 2s ease-in-out infinite;}
+.headphone-badge.show{display:flex;}
+@keyframes badgePulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+@keyframes slideUpBanner{from{transform:translateY(100%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@media (max-height:640px){.map-panel{height:22vh;max-height:160px;}.field-input-wrap input{font-size:22px;}.field-input-wrap.knot-f input{font-size:20px;}.nav-btn{min-height:48px;font-size:18px;}.field-input-wrap{min-height:48px;}.nav-main button{min-height:46px;padding:10px 6px;font-size:13px;}}
+</style>
+</head>
+<body>
+
+<div id="app">
+<header>
+<div class="logo">🧶</div>
+<div class="meta">
+<div class="title" id="appTitle">نقشه‌خوان گره‌بان</div>
+<div class="subtitle" id="appSub">نسخه ۱۴.۰</div>
+</div>
+<button class="btn-ico" id="btnVoice" title="صدا">🔇</button>
+<button class="btn-ico" id="btnPalette" style="display:none;">🎨</button>
+<button class="btn-ico" id="btnMenu">☰</button>
+</header>
+<main>
+<div class="welcome" id="welcomeScreen">
+<div class="hero">🧶</div>
+<h1>نقشه‌خوان گره‌بان</h1>
+<p id="welcomeMsg">فایل DKB خود را بارگذاری کنید تا رج به رج بافندگی کنید.</p>
+
+<div id="storedDkbBox" style="display:none;" class="stored-dkb-banner">
+<strong>💾 نقشه ذخیره‌شده پیدا شد</strong>
+<span id="storedDkbName">—</span>
+<div class="row">
+<button class="btn-use" onclick="useStoredDkb()">🎯 استفاده از این نقشه</button>
+<button class="btn-change" onclick="changeDkb()">📂 نقشه جدید</button>
+</div>
+</div>
+
+<div class="steps" id="welcomeSteps">
+<strong>📱 راهنما:</strong><br>
+۱. فایل <strong>.dkb</strong> را در گوشی ذخیره کنید<br>
+۲. روی دکمه زیر بزنید<br>
+۳. فایل را انتخاب کنید<br>
+۴. <strong>صدا را روشن کنید</strong> (دکمه 🔊 بالا)<br>
+۵. <b>دکمه هدفون = گره بعدی!</b> 🎧
+</div>
+
+<button class="big-btn" id="btnLoad"><span style="font-size:20px;">📂</span><span>بارگذاری فایل DKB</span></button>
+
+<button class="big-btn install-btn" id="btnInstall" style="display:none;" onclick="promptInstall()">
+<span style="font-size:20px;">📱</span>
+<span>افزودن به صفحه اصلی</span>
+</button>
+
+<input type="file" id="fileInput" accept=".dkb,.DKB,application/octet-stream,*/*" style="display:none;">
+</div>
+<div id="knitView">
+<div class="map-panel">
+<div class="map-scroll" id="mapScroll"><canvas id="mapCanvas"></canvas></div>
+</div>
+<div class="row-stats-bar" id="rowStatsBar">
+<div class="stat orange">
+<span class="lbl">رج</span>
+<span class="val" id="statRow">—</span>
+<span class="tot" id="statRowTot">از —</span>
+</div>
+<div class="stat green">
+<span class="lbl">گره در این رج</span>
+<span class="val" id="statKnot">—</span>
+<span class="tot" id="statKnotTot">از —</span>
+</div>
+<div class="stat">
+<span class="lbl">گره کل</span>
+<span class="val" id="statTotal">—</span>
+</div>
+</div>
+<div class="fields-area">
+<div class="field-row">
+<button class="nav-btn" id="btnRowPrev">◀</button>
+<div class="field-input-wrap row-f" id="wrapRow">
+<span class="lbl">رج</span>
+<input type="number" id="inputRow" inputmode="numeric" min="1">
+<span class="sub-info" id="subRow">/ —</span>
+</div>
+<button class="nav-btn" id="btnRowNext">▶</button>
+</div>
+<div class="field-row">
+<button class="nav-btn" id="btnColorPrev">◀</button>
+<div class="field-input-wrap color-f" id="wrapColor">
+<span class="lbl">رنگ</span>
+<input type="number" id="inputColor" inputmode="numeric" min="1">
+<span class="swatch" id="swatchColor"></span>
+</div>
+<button class="nav-btn" id="btnColorNext">▶</button>
+</div>
+<div class="field-row no-nav">
+<span class="ph"></span>
+<div class="field-input-wrap knot-f" id="wrapKnot">
+<span class="lbl">گره</span>
+<input type="text" id="inputKnot" inputmode="numeric" placeholder="جستجو...">
+<span class="sub-info" id="subKnot">—</span>
+</div>
+<span class="ph"></span>
+</div>
+</div>
+<div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-info"><span id="progLeft">—</span><span id="progRight">—</span></div>
+</div>
+</main>
+<div class="nav-main" id="navMain" style="display:none;">
+<button class="prev" id="btnPrev"><span class="ico">◀</span><span>قبلی</span></button>
+<button class="next" id="btnNext"><span class="ico">▶</span><span>بعدی</span></button>
+</div>
+</div>
+
+<div class="headphone-badge" id="hpBadge">🎧 دکمه هدفون فعال</div>
+
+<audio id="voicePlayer" preload="auto" playsinline></audio>
+
+<div class="modal" id="menuModal">
+<div class="modal-content">
+<h2>☰ منو</h2>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<button class="big-btn secondary" id="menuInstallBtn" style="display:none;width:100%;justify-content:center;" onclick="promptInstall();closeModal('menuModal')">📱 افزودن به صفحه اصلی</button>
+<button class="big-btn secondary" onclick="openVoiceSettings();closeModal('menuModal')" style="width:100%;justify-content:center;">🔊 تنظیمات صدا</button>
+<button class="big-btn secondary" onclick="showFullMap();closeModal('menuModal')" style="width:100%;justify-content:center;">🗺️ نمایش کل نقشه</button>
+<button class="big-btn secondary" onclick="openPalette();closeModal('menuModal')" style="width:100%;justify-content:center;">🎨 پالت رنگ‌ها</button>
+<button class="big-btn secondary" onclick="toggleFlip();closeModal('menuModal')" style="width:100%;justify-content:center;">🔄 چرخش ۱۸۰ درجه نقشه</button>
+<button class="big-btn secondary" onclick="toggleLtr();closeModal('menuModal')" style="width:100%;justify-content:center;">↔️ تغییر جهت بافتن</button>
+<button class="big-btn secondary" onclick="resetProgress();closeModal('menuModal')" style="width:100%;justify-content:center;">↩️ شروع از رج ۱</button>
+<button class="big-btn secondary" onclick="changeDkb();closeModal('menuModal')" style="width:100%;justify-content:center;">📂 بارگذاری فایل جدید</button>
+<button class="big-btn secondary" onclick="removeStoredDkb();closeModal('menuModal')" style="width:100%;justify-content:center;background:linear-gradient(135deg,#a0361e,#c0392b);">🗑️ حذف فایل ذخیره‌شده</button>
+<button class="big-btn secondary" onclick="showHeadphoneHelp();closeModal('menuModal')" style="width:100%;justify-content:center;">🎧 راهنمای هدفون</button>
+<button class="big-btn secondary" onclick="showAbout();closeModal('menuModal')" style="width:100%;justify-content:center;">ℹ️ درباره</button>
+</div>
+</div>
+</div>
+
+<div class="modal" id="voiceModal">
+<div class="modal-content">
+<h2>🔊 تنظیمات صدا</h2>
+<div id="unlockStatus" class="voice-info-box">
+<span id="unlockStatusIcon">🔒</span> <span id="unlockStatusText">منتظر اولین لمس...</span>
+</div>
+<div class="voice-row">
+<div><label>فعال‌سازی صدا</label><div class="hint">هنگام حرکت، قطعه جاری خوانده می‌شود</div></div>
+<label class="switch"><input type="checkbox" id="voiceToggle"><span class="slider"></span></label>
+</div>
+<div class="voice-row">
+<div><label>🎧 دکمه هدفون</label><div class="hint">دکمه تکی پاسخ تماس</div></div>
+<label class="switch"><input type="checkbox" id="hpToggle" checked><span class="slider"></span></label>
+</div>
+<div class="voice-row">
+<div><label>منبع صدا</label><div class="hint">صدای مرورگر یا فایل‌های شما</div></div>
+<select id="voiceSource">
+<option value="custom">فایل‌های صوتی من</option>
+<option value="browser">صدای مرورگر</option>
+</select>
+</div>
+<div id="customAudioPanel">
+<div class="voice-row">
+<div><label>بارگذاری فایل‌ها</label><div class="hint">همه فایل‌ها را یکجا انتخاب کنید</div></div>
+<button class="big-btn small" onclick="document.getElementById('audioFilesInput').click()">📁 انتخاب</button>
+<input type="file" id="audioFilesInput" multiple accept="audio/*" style="display:none;">
+</div>
+<div id="audioFilesStatus" class="voice-info-box">⏳ در حال بررسی...</div>
+<button class="big-btn secondary" onclick="clearAudioFiles()" style="width:100%;justify-content:center;margin-bottom:10px;padding:10px;font-size:12px;">🗑️ پاک کردن فایل‌های ذخیره‌شده</button>
+</div>
+<div id="browserVoicePanel" style="display:none;">
+<div class="voice-row">
+<div><label>نوع اعداد (مرورگر)</label><div class="hint">چطور گفته شود</div></div>
+<select id="voiceNumMode"><option value="persian">کلمات فارسی</option><option value="digit">اعداد</option></select>
+</div>
+</div>
+<div class="voice-row">
+<div><label>سرعت گفتار</label><div class="hint">آهسته یا تند</div></div>
+<div style="display:flex;align-items:center;gap:8px;">
+<input type="range" id="voiceRate" min="0.5" max="1.8" step="0.1" value="1">
+<span class="range-val" id="voiceRateVal">1.0</span>
+</div>
+</div>
+<div class="modal-actions" style="margin-top:16px;">
+<button class="cancel" onclick="testVoice()">🔊 تست صدا</button>
+<button class="ok" onclick="closeModal('voiceModal')">بستن</button>
+</div>
+</div>
+</div>
+
+<div class="modal" id="headphoneModal">
+<div class="modal-content">
+<h2>🎧 راهنمای هدفون</h2>
+<div style="font-size:12px;line-height:2;color:#b0c2d6;">
+<p style="margin-bottom:12px;">برای اینکه <strong style="color:#5dade2;">دکمه تکی هدفون</strong> (دکمه پاسخ تماس) گره را جلو ببرد:</p>
+<ol style="padding-right:20px;padding-left:0;margin-bottom:14px;">
+<li>هدفون را <strong>قبل از باز کردن اپ</strong> به گوشی وصل کنید</li>
+<li>اپ را در <strong>Chrome</strong> باز کنید</li>
+<li>فایل DKB را بارگذاری کنید</li>
+<li>روی دکمه <strong>🔊</strong> بزنید</li>
+<li>یک بار روی دکمه <strong>بعدی</strong> در اپ بزنید</li>
+<li>حالا دکمه تکی هدفون را فشار دهید → <strong>گره بعدی</strong></li>
+</ol>
+<p style="background:#0f3620;padding:10px;border-radius:8px;color:#a8e6b8;">
+💡 نشان <strong>«🎧 دکمه هدفون فعال»</strong> در گوشه پایین-چپ ظاهر می‌شود وقتی سیستم آماده است.
+</p>
+</div>
+<div class="modal-actions" style="margin-top:16px;">
+<button class="ok" onclick="closeModal('headphoneModal')" style="flex:1;">فهمیدم</button>
+</div>
+</div>
+</div>
+
+<div class="modal" id="installModal">
+<div class="modal-content">
+<h2>📱 نصب روی صفحه اصلی</h2>
+<div style="font-size:12px;line-height:2;color:#b0c2d6;" id="installInstructions">
+</div>
+<div class="modal-actions" style="margin-top:16px;">
+<button class="ok" onclick="closeModal('installModal')" style="flex:1;">فهمیدم</button>
+</div>
+</div>
+</div>
+
+<div class="modal" id="aboutModal">
+<div class="modal-content">
+<h2>ℹ️ درباره</h2>
+<div style="font-size:12px;line-height:2;color:#b0c2d6;">
+<p><strong>نقشه‌خوان گره‌بان — نسخه ۱۴.۰</strong></p>
+<p>اپلیکیشن نقشه‌خوان فرش برای بافندگان.</p>
+<p>با پشتیبانی از:
+<br>• نصب روی صفحه اصلی گوشی
+<br>• ذخیره دائمی فایل DKB
+<br>• پخش صوتی با فایل‌های شخصی
+<br>• کنترل با دکمه هدفون
+<br>• ذخیره خودکار موقعیت بافتن</p>
+</div>
+<div class="modal-actions" style="margin-top:16px;">
+<button class="ok" onclick="closeModal('aboutModal')" style="flex:1;">بستن</button>
+</div>
+</div>
+</div>
+
+<div class="modal" id="paletteModal">
+<div class="modal-content">
+<h2>🎨 پالت رنگ‌ها</h2>
+<p style="font-size:12px;">روی هر رنگ بزنید تا رنگ واقعی نخ را تنظیم کنید.</p>
+<div class="palette-grid" id="paletteGrid"></div>
+<div class="modal-actions">
+<button class="cancel" onclick="closeModal('paletteModal')">بستن</button>
+<button class="ok" onclick="resetPaletteColors()">بازنشانی</button>
+</div>
+</div>
+</div>
+
+<div id="fullMap">
+<div class="fm-header">
+<h3>🗺️ نمای کل نقشه</h3>
+<button onclick="zoomFullMap(1.3)">➕</button>
+<button onclick="zoomFullMap(0.77)">➖</button>
+<button onclick="closeFullMap()">✕</button>
+</div>
+<div class="fm-body" id="fmBody"><canvas id="fullMapCanvas"></canvas></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="loader" id="loader"><div class="spinner"></div><div class="msg" id="loaderMsg">در حال بارگذاری...</div></div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════
+   SMART INSTALL DETECTION
+   ═══════════════════════════════════════════════ */
+const Env = {
+    isFile:    location.protocol === 'file:',
+    isHttps:   location.protocol === 'https:',
+    isAndroid: /Android/i.test(navigator.userAgent),
+    isIOS:     /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
+    isChrome:  /Chrome/.test(navigator.userAgent) && !/Edge|OPR|Edg/.test(navigator.userAgent),
+    isOpera:   /OPR|Opera/.test(navigator.userAgent),
+    isSafari:  /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
+    isFirefox: /Firefox/.test(navigator.userAgent),
+    isStandalone: window.matchMedia('(display-mode: standalone)').matches
+                || window.navigator.standalone === true,
+    isDesktop: /Windows|Macintosh|Linux/.test(navigator.userAgent) && !/Android|iPhone|iPad/.test(navigator.userAgent),
+};
+
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    console.log('📱 beforeinstallprompt captured');
+    showInstallUI();
+});
+
+window.addEventListener('appinstalled', () => {
+    console.log('📱 App installed');
+    deferredInstallPrompt = null;
+    hideInstallUI();
+    showToast('🎉 اپ روی صفحه اصلی نصب شد!');
+});
+
+function showInstallUI() {
+    const b = document.getElementById('btnInstall');
+    const m = document.getElementById('menuInstallBtn');
+    if (b) b.style.display = 'inline-flex';
+    if (m) m.style.display = 'inline-flex';
+}
+function hideInstallUI() {
+    const b = document.getElementById('btnInstall');
+    const m = document.getElementById('menuInstallBtn');
+    if (b) b.style.display = 'none';
+    if (m) m.style.display = 'none';
+}
+
+async function promptInstall() {
+    if (deferredInstallPrompt) {
+        try {
+            deferredInstallPrompt.prompt();
+            const choice = await deferredInstallPrompt.userChoice;
+            console.log('📱 User choice:', choice.outcome);
+            if (choice.outcome === 'accepted') showToast('🎉 در حال نصب...');
+            deferredInstallPrompt = null;
+            hideInstallUI();
+            return;
+        } catch(e) { console.warn(e); }
+    }
+    openAutoInstallGuide();
+}
+
+function openAutoInstallGuide() {
+    const modal = document.getElementById('installModal');
+    const box = document.getElementById('installInstructions');
+    let html = '';
+
+    if (Env.isFile && Env.isAndroid && (Env.isChrome || Env.isFirefox)) {
+        html = `
+            <div style="background:#3a1010;border:2px solid #7d1717;border-radius:10px;padding:14px;color:#ff9999;margin-bottom:14px;line-height:1.9;">
+                <strong style="font-size:14px;display:block;margin-bottom:6px;">⚠️ محدودیت فنی</strong>
+                Chrome اندروید <strong>گزینه «افزودن به صفحه اصلی»</strong> را برای فایل‌های محلی
+                (<code style="background:#000;padding:1px 4px;border-radius:3px;">file://</code>) نمایش نمی‌دهد.
+                این محدودیت برای امنیت شماست و مرورگر آن را عمدی پنهان کرده است.
+            </div>
+
+            <div style="background:#0f3620;border:2px solid #2ecc71;border-radius:10px;padding:14px;margin-bottom:14px;line-height:2;">
+                <strong style="color:#2ecc71;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل ۱: استفاده از Opera (ساده‌ترین)</strong>
+                <ol style="padding-right:20px;padding-left:0;margin-bottom:10px;">
+                    <li>روی دکمه زیر بزنید و Opera را نصب کنید</li>
+                    <li>فایل <code style="background:#000;padding:1px 4px;border-radius:3px;">weaver.html</code> را در Opera باز کنید</li>
+                    <li>منوی سه‌نقطه Opera → <strong>Add to Home screen</strong></li>
+                </ol>
+                <a href="https://play.google.com/store/apps/details?id=com.opera.browser" target="_blank" style="display:inline-block;width:100%;text-align:center;background:linear-gradient(135deg,#cc0000,#e74c3c);color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:14px;box-sizing:border-box;">
+                    📥 نصب Opera از Google Play
+                </a>
+            </div>
+
+            <div style="background:#0f2536;border:2px solid #3498db;border-radius:10px;padding:14px;margin-bottom:14px;line-height:2;">
+                <strong style="color:#5dade2;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل ۲: تغییر به HTTPS (تضمینی)</strong>
+                <p style="font-size:12px;color:#b0c2d6;margin-bottom:10px;">
+                    فایل را روی یک هاست رایگان بگذارید تا Chrome گزینه نصب را نشان دهد:
+                </p>
+                <ol style="padding-right:20px;padding-left:0;font-size:12px;">
+                    <li>به <code style="background:#000;padding:1px 4px;border-radius:3px;">app.netlify.com/drop</code> بروید</li>
+                    <li>پوشه حاوی <code style="background:#000;padding:1px 4px;border-radius:3px;">weaver.html</code> را رها کنید</li>
+                    <li>لینک HTTPS را روی گوشی باز کنید</li>
+                    <li>حالا دکمه «نصب» خودکار ظاهر می‌شود</li>
+                </ol>
+            </div>
+
+            <div style="background:#3a2b0f;border:2px solid #f39c12;border-radius:10px;padding:14px;line-height:2;">
+                <strong style="color:#ffd166;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل ۳: ساخت Bookmark دستی</strong>
+                <ol style="padding-right:20px;padding-left:0;font-size:12px;">
+                    <li>در Chrome، این صفحه را باز کنید</li>
+                    <li>روی ستاره ⭐ در نوار آدرس بزنید</li>
+                    <li>در <strong>Mobile bookmarks</strong> ذخیره کنید</li>
+                    <li>در صفحه اصلی گوشی، Widget از Chrome Bookmarks بسازید</li>
+                </ol>
+                <button onclick="copyCurrentUrl()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;padding:10px;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:bold;cursor:pointer;">
+                    📋 کپی لینک فعلی
+                </button>
+            </div>
+        `;
+    } else if (Env.isFile && Env.isOpera) {
+        html = `
+            <div style="background:#0f3620;border:2px solid #2ecc71;border-radius:10px;padding:14px;color:#a8e6b8;line-height:2;">
+                <strong style="color:#2ecc71;font-size:14px;display:block;margin-bottom:10px;">🎉 خبر خوب!</strong>
+                شما از Opera استفاده می‌کنید که از فایل‌های محلی پشتیبانی می‌کند.
+                <ol style="padding-right:20px;padding-left:0;margin-top:10px;">
+                    <li>روی منوی <strong>☰</strong> در Opera بزنید</li>
+                    <li>گزینه <strong>Add to Home screen</strong> را انتخاب کنید</li>
+                    <li>نام «گره‌بان» را تأیید کنید</li>
+                </ol>
+            </div>
+        `;
+    } else if (Env.isFile && Env.isIOS && Env.isSafari) {
+        html = `
+            <div style="background:#3a1010;border:2px solid #7d1717;border-radius:10px;padding:14px;color:#ff9999;margin-bottom:14px;line-height:1.9;">
+                <strong style="font-size:14px;display:block;margin-bottom:6px;">⚠️ محدودیت iOS</strong>
+                Safari در iOS اجازه افزودن فایل محلی به صفحه اصلی را نمی‌دهد.
+            </div>
+            <div style="background:#0f2536;border:2px solid #3498db;border-radius:10px;padding:14px;line-height:2;">
+                <strong style="color:#5dade2;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل:</strong>
+                <ol style="padding-right:20px;padding-left:0;">
+                    <li>فایل را روی هاست HTTPS بگذارید (Netlify)</li>
+                    <li>لینک را در Safari باز کنید</li>
+                    <li>دکمه <strong>Share</strong> → <strong>Add to Home Screen</strong></li>
+                </ol>
+            </div>
+        `;
+    } else if (Env.isDesktop) {
+        html = `
+            <div style="background:#0f3620;border:2px solid #2ecc71;border-radius:10px;padding:14px;line-height:2;">
+                <strong style="color:#2ecc71;font-size:14px;display:block;margin-bottom:10px;">🖥️ ساخت Shortcut روی دسکتاپ (ویندوز)</strong>
+                <ol style="padding-right:20px;padding-left:0;font-size:12px;">
+                    <li>روی دسکتاپ راست-کلیک کنید</li>
+                    <li><strong>New → Shortcut</strong></li>
+                    <li>در فیلد Location این را وارد کنید:
+                        <div style="background:#000;padding:8px;border-radius:6px;font-family:monospace;font-size:11px;direction:ltr;margin-top:6px;word-break:break-all;color:#5dade2;">
+                            "chrome.exe" --app=file:///<span id="filePathDisplay">${location.pathname}</span>
+                        </div>
+                    </li>
+                    <li>روی <strong>Next</strong> و بعد <strong>Finish</strong> بزنید</li>
+                </ol>
+                <button onclick="copyForDesktop()" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;padding:10px;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:bold;cursor:pointer;">
+                    📋 کپی دستور برای دسکتاپ
+                </button>
+            </div>
+        `;
+    } else {
+        html = `
+            <div style="background:#0f2536;border:2px solid #3498db;border-radius:10px;padding:14px;line-height:2;">
+                <strong style="color:#5dade2;display:block;margin-bottom:10px;">📱 راهنمای نصب</strong>
+                <ol style="padding-right:20px;padding-left:0;">
+                    <li>منوی مرورگر را باز کنید (☰ یا ⋮)</li>
+                    <li>گزینه <strong>Add to Home screen</strong> یا <strong>Install</strong> را انتخاب کنید</li>
+                    <li>نام «گره‌بان» را تأیید کنید</li>
+                </ol>
+            </div>
+        `;
+    }
+
+    box.innerHTML = html;
+    openModal('installModal');
+}
+
+function copyCurrentUrl() {
+    const url = location.href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(
+            () => showToast('✅ لینک کپی شد'),
+            () => fallbackCopy(url)
+        );
+    } else {
+        fallbackCopy(url);
+    }
+}
+
+function copyForDesktop() {
+    const cmd = `"chrome.exe" --app=${location.href}`;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(cmd).then(
+            () => showToast('✅ دستور کپی شد'),
+            () => fallbackCopy(cmd)
+        );
+    } else {
+        fallbackCopy(cmd);
+    }
+}
+
+function fallbackCopy(text) {
+    try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('✅ کپی شد');
+    } catch(e) { showToast('❌ کپی نشد', true); }
+}
+
+function showFileModeBanner() {
+    if (sessionStorage.getItem('file_banner_dismissed') === '1') return;
+    if (document.getElementById('fileModeBanner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'fileModeBanner';
+    banner.style.cssText = `
+        position:fixed;bottom:0;left:0;right:0;
+        background:linear-gradient(135deg,#8e44ad,#9b59b6);
+        color:#fff;padding:14px 16px;
+        box-shadow:0 -4px 20px rgba(0,0,0,0.4);
+        z-index:1000;font-size:13px;line-height:1.7;
+        display:flex;flex-direction:column;gap:10px;
+        animation:slideUpBanner 0.4s ease-out;
+    `;
+    banner.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+            <div style="flex:1;">
+                <strong style="font-size:14px;">📱 می‌خواهید روی صفحه اصلی نصب شود؟</strong><br>
+                <span style="opacity:0.9;font-size:12px;">راهنمای گام‌به‌گام برای نصب آسان</span>
+            </div>
+            <button onclick="document.getElementById('fileModeBanner').remove();sessionStorage.setItem('file_banner_dismissed','1');" style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;font-family:inherit;padding:0;line-height:1;flex-shrink:0;">✕</button>
+        </div>
+        <button onclick="openAutoInstallGuide();document.getElementById('fileModeBanner').remove();sessionStorage.setItem('file_banner_dismissed','1');" style="width:100%;background:#fff;color:#8e44ad;border:none;padding:12px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:bold;cursor:pointer;">
+            🎯 نمایش راهنمای نصب
+        </button>
+    `;
+    document.body.appendChild(banner);
+}
+
+/* ═══════════════════════════════════════════════
+   DKB PARSER
+   ═══════════════════════════════════════════════ */
+const ROW_MARKER = 0xFFFFFFFF;
+const COLOR_MARKER = 0xFFFFFFFE;
+const RANGE_MARKER = 0xFFFFFFFD;
+
+function parseDKB(buffer) {
+    const bytes = new Uint8Array(buffer);
+    const view = new DataView(buffer);
+    let off = 0;
+    if (bytes.length < 6) throw new Error('فایل بسیار کوچک است');
+    if (bytes[off] !== 0x00) throw new Error('مهر DKB نامعتبر');
+    off++;
+    const nameLen = bytes[off]; off++;
+    if (off + nameLen + 2 > bytes.length) throw new Error('طول نام نامعتبر');
+    const name = new TextDecoder('utf-8').decode(bytes.slice(off, off + nameLen));
+    off += nameLen;
+    if (bytes[off] !== 0x00 || bytes[off + 1] !== 0x1F) throw new Error('جداکننده نامعتبر');
+    off += 2;
+    let descEnd = off;
+    while (descEnd + 4 <= bytes.length) {
+        if (bytes[descEnd]===0xFF && bytes[descEnd+1]===0xFF && bytes[descEnd+2]===0xFF && bytes[descEnd+3]===0xFF) break;
+        descEnd++;
+    }
+    const description = new TextDecoder('utf-8').decode(bytes.slice(off, descEnd));
+    off = descEnd;
+    const rows = [];
+    let maxKnot = 0, maxColor = 0, totalKnots = 0;
+    while (off + 8 <= bytes.length) {
+        const marker = view.getUint32(off, true);
+        if (marker !== ROW_MARKER) break;
+        off += 4;
+        const rowNum = view.getUint32(off, true); off += 4;
+        const rowObj = { rowNum: rowNum, colors: [] };
+        let rowKnots = 0;
+        while (off + 4 <= bytes.length) {
+            const look = view.getUint32(off, true);
+            if (look === ROW_MARKER) break;
+            if (look === COLOR_MARKER) {
+                off += 4;
+                if (off + 4 > bytes.length) break;
+                const colorNum = view.getUint32(off, true); off += 4;
+                if (colorNum > maxColor) maxColor = colorNum;
+                const colorObj = { color: colorNum, ranges: [] };
+                while (off + 4 <= bytes.length) {
+                    const t = view.getUint32(off, true);
+                    if (t === COLOR_MARKER || t === ROW_MARKER) break;
+                    if (t === RANGE_MARKER) { off += 4; continue; }
+                    off += 4;
+                    const start = t;
+                    let end = start;
+                    if (off + 4 <= bytes.length) {
+                        const peek = view.getUint32(off, true);
+                        if (peek === RANGE_MARKER) {
+                            off += 4;
+                            if (off + 4 <= bytes.length) { end = view.getUint32(off, true); off += 4; }
+                        }
+                    }
+                    colorObj.ranges.push([start, end]);
+                    rowKnots += (end - start + 1);
+                    if (end > maxKnot) maxKnot = end;
+                }
+                rowObj.colors.push(colorObj);
+            } else break;
+        }
+        rows.push(rowObj);
+        totalKnots += rowKnots;
+    }
+    return { name, description, rows, maxKnot, maxColor, totalRows: rows.length, totalKnots };
+}
+
+const App = {
+    dkb: null, segs: [], segStartCum: [], totalKnots: 0,
+    currentSegIdx: 0, customColors: {}, fileKey: null,
+    flipped: false, ltr: false, rowStats: {},
+};
+
+/* ═══════════════════════════════════════════════
+   DKB STORE
+   ═══════════════════════════════════════════════ */
+const DKBStore = {
+    DB_NAME: 'weaver_dkb_db_v1',
+    STORE: 'files',
+    KEY_FILE: 'current_dkb',
+    KEY_META: 'dkb_meta',
+    db: null,
+    async open() {
+        if (this.db) return this.db;
+        return new Promise((res, rej) => {
+            const r = indexedDB.open(this.DB_NAME, 1);
+            r.onupgradeneeded = e => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains(this.STORE)) db.createObjectStore(this.STORE);
+            };
+            r.onsuccess = () => { this.db = r.result; res(this.db); };
+            r.onerror = () => rej(r.error);
+        });
+    },
+    async saveFromBuffer(buffer, name, size) {
+        const db = await this.open();
+        const blob = new Blob([buffer], { type: 'application/octet-stream' });
+        const meta = { name, size, savedAt: new Date().toISOString() };
+        return new Promise((res, rej) => {
+            const tx = db.transaction(this.STORE, 'readwrite');
+            const st = tx.objectStore(this.STORE);
+            st.put(blob, this.KEY_FILE);
+            st.put(meta, this.KEY_META);
+            tx.oncomplete = () => res();
+            tx.onerror = () => rej(tx.error);
+        });
+    },
+    async load() {
+        const db = await this.open();
+        return new Promise((res, rej) => {
+            const tx = db.transaction(this.STORE, 'readonly');
+            const st = tx.objectStore(this.STORE);
+            const rFile = st.get(this.KEY_FILE);
+            const rMeta = st.get(this.KEY_META);
+            tx.oncomplete = () => {
+                const file = rFile.result;
+                const meta = rMeta.result;
+                if (file && meta) res({ blob: file, meta });
+                else res(null);
+            };
+            tx.onerror = () => rej(tx.error);
+        });
+    },
+    async clear() {
+        const db = await this.open();
+        return new Promise((res, rej) => {
+            const tx = db.transaction(this.STORE, 'readwrite');
+            const st = tx.objectStore(this.STORE);
+            st.delete(this.KEY_FILE);
+            st.delete(this.KEY_META);
+            tx.oncomplete = () => res();
+            tx.onerror = () => rej(tx.error);
+        });
+    }
+};
+
+/* ═══════════════════════════════════════════════
+   AUDIO ENGINE
+   ═══════════════════════════════════════════════ */
+const AudioEngine = {
+    ctx: null, unlocked: false, bufferCache: {},
+    currentSource: null, queue: [], playing: false,
+    async init() {
+        if (this.ctx) return;
+        try {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) throw new Error('AudioContext not supported');
+            this.ctx = new AC();
+        } catch(e) { console.error('[AudioEngine]', e); }
+    },
+    async unlock() {
+        if (this.unlocked) return true;
+        await this.init();
+        if (!this.ctx) return false;
+        try {
+            if (this.ctx.state === 'suspended') await this.ctx.resume();
+            const buf = this.ctx.createBuffer(1, 1, 22050);
+            const src = this.ctx.createBufferSource();
+            src.buffer = buf;
+            src.connect(this.ctx.destination);
+            src.start(0);
+            this.unlocked = true;
+            updateUnlockStatus();
+            return true;
+        } catch(e) { return false; }
+    },
+    async getBuffer(key) {
+        if (this.bufferCache[key]) return this.bufferCache[key];
+        const blob = findAudioBlob(key);
+        if (!blob) return null;
+        try {
+            const arr = await blob.arrayBuffer();
+            const audioBuf = await this.ctx.decodeAudioData(arr.slice(0));
+            this.bufferCache[key] = audioBuf;
+            return audioBuf;
+        } catch(e) { return null; }
+    },
+    async playKeys(keys) {
+        if (!this.unlocked) {
+            const ok = await this.unlock();
+            if (!ok) return;
+        }
+        this.queue = keys.slice();
+        if (this.playing) return;
+        this.playing = true;
+        await this._playLoop();
+        this.playing = false;
+    },
+    async _playLoop() {
+        while (this.queue.length > 0) {
+            const key = this.queue.shift();
+            const buf = await this.getBuffer(key);
+            if (!buf) continue;
+            await new Promise(resolve => {
+                const src = this.ctx.createBufferSource();
+                src.buffer = buf;
+                src.playbackRate.value = Voice.rate;
+                src.connect(this.ctx.destination);
+                this.currentSource = src;
+                src.onended = () => { this.currentSource = null; resolve(); };
+                try { src.start(0); } catch(e) { this.currentSource = null; resolve(); }
+            });
+        }
+    },
+    stop() {
+        this.queue = [];
+        if (this.currentSource) {
+            try { this.currentSource.stop(); } catch(e) {}
+            this.currentSource = null;
+        }
+        this.playing = false;
+    }
+};
+
+const FILE_ALIASES = {
+    row:   ['raj', 'row', 'rj'],
+    color: ['rang', 'color', 'range'],
+    knot:  ['ghereh', 'knot', 'gereh', 'girih'],
+    to:    ['ela', 'to', 'ta', 'ila'],
+    va:    ['va', 'و'],
+};
+
+function findAudioBlob(logicalName) {
+    const aliases = FILE_ALIASES[logicalName] || [logicalName];
+    for (const k of aliases) if (AudioStore.files[k]) return AudioStore.files[k];
+    if (AudioStore.files[logicalName]) return AudioStore.files[logicalName];
+    return null;
+}
+
+function numberToKeys(n) {
+    n = parseInt(n, 10);
+    if (isNaN(n) || n < 0) return [];
+    if (n === 0) return ['0'];
+    if (n <= 20) return [String(n)];
+    const keys = [];
+    let rem = n;
+    if (rem >= 1000000) {
+        const m = Math.floor(rem / 1000000);
+        if (m > 1) keys.push(...numberToKeys(m));
+        keys.push(rem % 1000000 === 0 ? '1000000' : '1000000_');
+        rem %= 1000000;
+    }
+    if (rem >= 1000) {
+        const t = Math.floor(rem / 1000);
+        if (t > 1) keys.push(...numberToKeys(t));
+        keys.push(rem % 1000 === 0 ? '1000' : '1000_');
+        rem %= 1000;
+    }
+    if (rem >= 100) {
+        const h = Math.floor(rem / 100) * 100;
+        keys.push(rem % 100 === 0 ? String(h) : h + '_');
+        rem %= 100;
+    }
+    if (rem >= 20) {
+        const d = Math.floor(rem / 10) * 10;
+        keys.push(rem % 10 === 0 ? String(d) : d + '_');
+        rem %= 10;
+    }
+    if (rem > 0) keys.push(String(rem));
+    return keys;
+}
+
+const AudioStore = {
+    DB_NAME: 'weaver_audio_db_v6', STORE: 'files', files: {}, db: null,
+    async open() {
+        if (this.db) return this.db;
+        return new Promise((res, rej) => {
+            const r = indexedDB.open(this.DB_NAME, 1);
+            r.onupgradeneeded = e => { const db = e.target.result; if (!db.objectStoreNames.contains(this.STORE)) db.createObjectStore(this.STORE); };
+            r.onsuccess = () => { this.db = r.result; res(this.db); };
+            r.onerror = () => rej(r.error);
+        });
+    },
+    async save(map) {
+        const db = await this.open();
+        return new Promise((res, rej) => {
+            const tx = db.transaction(this.STORE, 'readwrite');
+            const st = tx.objectStore(this.STORE);
+            st.clear();
+            for (const [k, blob] of Object.entries(map)) st.put(blob, k);
+            tx.oncomplete = () => res();
+            tx.onerror = () => rej(tx.error);
+        });
+    },
+    async load() {
+        const db = await this.open();
+        return new Promise((res, rej) => {
+            const tx = db.transaction(this.STORE, 'readonly');
+            const st = tx.objectStore(this.STORE);
+            const out = {};
+            const r = st.openCursor();
+            r.onsuccess = e => {
+                const c = e.target.result;
+                if (c) { out[c.key] = c.value; c.continue(); }
+                else { this.files = out; res(out); }
+            };
+            r.onerror = () => rej(r.error);
+        });
+    },
+    async clear() {
+        const db = await this.open();
+        return new Promise((res, rej) => {
+            const tx = db.transaction(this.STORE, 'readwrite');
+            tx.objectStore(this.STORE).clear();
+            tx.oncomplete = () => { this.files = {}; res(); };
+            tx.onerror = () => rej(tx.error);
+        });
+    },
+    count() { return Object.keys(this.files).length; },
+    has(k) { return !!this.files[k]; }
+};
+
+const Voice = {
+    enabled: false, rate: 1.0, numMode: 'persian',
+    source: 'custom', voices: [], faVoice: null, supported: false,
+    headphoneEnabled: true,
+    lastSpoken: { row: null, color: null, start: null, end: null },
+};
+
+function initVoices() {
+    if (!window.speechSynthesis) { Voice.supported = false; return; }
+    Voice.supported = true;
+    const load = () => {
+        try { Voice.voices = window.speechSynthesis.getVoices() || []; } catch(e) { Voice.voices = []; }
+        Voice.faVoice = Voice.voices.find(v => v.lang && v.lang.toLowerCase().indexOf('fa') === 0)
+                     || Voice.voices.find(v => v.lang && v.lang.toLowerCase().indexOf('ar') === 0) || null;
+    };
+    load();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) window.speechSynthesis.onvoiceschanged = load;
+    setTimeout(load, 1000); setTimeout(load, 2500);
+}
+
+function toPersianNumberWords(n) {
+    const y = ['', 'یک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه'];
+    const dg = ['', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود'];
+    const d = ['ده', 'یازده', 'دوازده', 'سیزده', 'چهارده', 'پانزده', 'شانزده', 'هفده', 'هجده', 'نوزده'];
+    const s = ['', 'صد', 'دویست', 'سیصد', 'چهارصد', 'پانصد', 'ششصد', 'هفتصد', 'هشتصد', 'نهصد'];
+    n = parseInt(n, 10);
+    if (isNaN(n) || n < 0) return '';
+    if (n === 0) return 'صفر';
+    const parts = [];
+    if (n >= 1000) { parts.push(toPersianNumberWords(Math.floor(n/1000)) + ' هزار'); n %= 1000; }
+    if (n >= 100) { parts.push(s[Math.floor(n/100)]); n %= 100; }
+    if (n >= 20) { parts.push(dg[Math.floor(n/10)]); n %= 10; }
+    else if (n >= 10) { parts.push(d[n-10]); n = 0; }
+    if (n > 0) parts.push(y[n]);
+    return parts.join(' و ');
+}
+
+function speakBrowser(text) {
+    if (!Voice.supported || !text) return;
+    try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'fa-IR'; u.rate = Voice.rate;
+        if (Voice.faVoice) u.voice = Voice.faVoice;
+        window.speechSynthesis.speak(u);
+    } catch(e) {}
+}
+
+function speakCurrentSegment(force = false) {
+    if (!Voice.enabled) return;
+    const pos = getCurrentPosition();
+    if (!pos) return;
+    const rCh = Voice.lastSpoken.row !== pos.rowNum;
+    const cCh = Voice.lastSpoken.color !== pos.color;
+    const rgCh = Voice.lastSpoken.start !== pos.start || Voice.lastSpoken.end !== pos.end;
+    if (!force && !rCh && !cCh && !rgCh) return;
+
+    if (Voice.source === 'custom' && AudioStore.count() > 0) {
+        const keys = [];
+        if (force || rCh) { keys.push('row'); keys.push(...numberToKeys(pos.rowNum)); }
+        if (force || cCh) { keys.push('color'); keys.push(...numberToKeys(pos.color)); }
+        keys.push('knot');
+        keys.push(...numberToKeys(pos.start));
+        if (pos.start !== pos.end) { keys.push('to'); keys.push(...numberToKeys(pos.end)); }
+        AudioEngine.playKeys(keys);
+    } else {
+        const parts = [];
+        if (force || rCh) parts.push('رج ' + toPersianNumberWords(pos.rowNum));
+        if (force || cCh) parts.push('رنگ ' + toPersianNumberWords(pos.color));
+        if (pos.start === pos.end) parts.push('گره ' + toPersianNumberWords(pos.start));
+        else parts.push('گره ' + toPersianNumberWords(pos.start) + ' تا ' + toPersianNumberWords(pos.end));
+        speakBrowser(parts.join('، '));
+    }
+    Voice.lastSpoken = { row: pos.rowNum, color: pos.color, start: pos.start, end: pos.end };
+}
+
+function toggleVoice() {
+    Voice.enabled = !Voice.enabled;
+    updateVoiceButton();
+    saveVoiceSettings();
+    if (Voice.enabled) {
+        showToast('🔊 صدا روشن شد');
+        Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+        startHeadphoneBridge();
+        setTimeout(() => speakCurrentSegment(true), 300);
+    } else {
+        showToast('🔇 صدا خاموش شد');
+        try { window.speechSynthesis.cancel(); } catch(e) {}
+        AudioEngine.stop();
+        stopHeadphoneBridge();
+    }
+    vibrate(40);
+}
+
+function updateVoiceButton() {
+    const btn = document.getElementById('btnVoice');
+    if (!btn) return;
+    if (Voice.enabled) { btn.textContent = '🔊'; btn.classList.add('voice-on'); }
+    else { btn.textContent = '🔇'; btn.classList.remove('voice-on'); }
+}
+
+function saveVoiceSettings() {
+    try { localStorage.setItem('weaver_voice', JSON.stringify({
+        enabled: Voice.enabled, rate: Voice.rate, numMode: Voice.numMode,
+        source: Voice.source, headphoneEnabled: Voice.headphoneEnabled
+    })); } catch(e) {}
+}
+function loadVoiceSettings() {
+    try {
+        const v = localStorage.getItem('weaver_voice');
+        if (!v) return;
+        const s = JSON.parse(v);
+        Voice.enabled = !!s.enabled; Voice.rate = parseFloat(s.rate) || 1.0;
+        Voice.numMode = s.numMode || 'persian'; Voice.source = s.source || 'custom';
+        Voice.headphoneEnabled = s.headphoneEnabled !== false;
+    } catch(e) {}
+}
+
+function updateUnlockStatus() {
+    const icon = document.getElementById('unlockStatusIcon');
+    const text = document.getElementById('unlockStatusText');
+    const box = document.getElementById('unlockStatus');
+    if (!icon || !text) return;
+    if (AudioEngine.unlocked) {
+        icon.textContent = '🔓';
+        text.textContent = 'صدا آماده است';
+        box.className = 'voice-info-box ok';
+    } else {
+        icon.textContent = '🔒';
+        text.textContent = 'برای فعال‌سازی صدا، یک بار روی صفحه ضربه بزنید';
+        box.className = 'voice-info-box warn';
+    }
+}
+
+const HeadphoneBridge = {
+    silentAudio: null, active: false, lastAction: 0, debounceMs: 350,
+    makeSilentWavUrl(seconds = 2, sampleRate = 8000) {
+        const numSamples = sampleRate * seconds;
+        const dataSize = numSamples;
+        const buffer = new ArrayBuffer(44 + dataSize);
+        const view = new DataView(buffer);
+        const ws = (offset, str) => { for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i)); };
+        ws(0, 'RIFF');
+        view.setUint32(4, 36 + dataSize, true);
+        ws(8, 'WAVE');
+        ws(12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        view.setUint16(22, 1, true);
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate, true);
+        view.setUint16(32, 1, true);
+        view.setUint16(34, 8, true);
+        ws(36, 'data');
+        view.setUint32(40, dataSize, true);
+        const bytes = new Uint8Array(buffer, 44);
+        bytes.fill(128);
+        return URL.createObjectURL(new Blob([buffer], { type: 'audio/wav' }));
+    },
+    async start() {
+        if (this.active) return;
+        if (!Voice.headphoneEnabled) return;
+        if (!('mediaSession' in navigator)) { console.warn('[HP] MediaSession not supported'); return; }
+        try {
+            if (!this.silentAudio) {
+                const url = this.makeSilentWavUrl(2);
+                this.silentAudio = new Audio(url);
+                this.silentAudio.loop = true;
+                this.silentAudio.volume = 0.001;
+                this.silentAudio.setAttribute('playsinline', '');
+            }
+            await this.silentAudio.play().catch(e => { console.warn('[HP] silent play failed:', e.message); });
+            this.setupHandlers();
+            this.updateMetadata();
+            this.active = true;
+            console.log('🎧 Headphone Bridge active');
+            updateHpBadge();
+        } catch(e) { console.error('[HP] start failed', e); }
+    },
+    stop() {
+        this.active = false;
+        if (this.silentAudio) { try { this.silentAudio.pause(); } catch(e) {} }
+        if ('mediaSession' in navigator) {
+            try {
+                navigator.mediaSession.setActionHandler('play', null);
+                navigator.mediaSession.setActionHandler('pause', null);
+                navigator.mediaSession.setActionHandler('nexttrack', null);
+                navigator.mediaSession.setActionHandler('previoustrack', null);
+                navigator.mediaSession.setActionHandler('stop', null);
+                navigator.mediaSession.metadata = null;
+            } catch(e) {}
+        }
+        console.log('🎧 Headphone Bridge stopped');
+        updateHpBadge();
+    },
+    onHeadphoneButton() {
+        const now = Date.now();
+        if (now - this.lastAction < this.debounceMs) return;
+        this.lastAction = now;
+        console.log('🎧 HEADPHONE BUTTON → moveNext()');
+        if (!App.dkb) { showToast('🎧 فایل بارگذاری نشده', true); return; }
+        if (!Voice.enabled) {
+            Voice.enabled = true;
+            updateVoiceButton();
+            saveVoiceSettings();
+            Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+        }
+        moveNext();
+        vibrate(50);
+    },
+    setupHandlers() {
+        const self = this;
+        try {
+            navigator.mediaSession.setActionHandler('play', () => {
+                console.log('🎧 play');
+                self.onHeadphoneButton();
+                if (self.silentAudio && self.silentAudio.paused) self.silentAudio.play().catch(()=>{});
+                try { navigator.mediaSession.playbackState = 'playing'; } catch(e) {}
+            });
+        } catch(e) {}
+        try {
+            navigator.mediaSession.setActionHandler('pause', () => {
+                console.log('🎧 pause');
+                self.onHeadphoneButton();
+                if (self.silentAudio) {
+                    setTimeout(() => {
+                        self.silentAudio.play().catch(()=>{});
+                        try { navigator.mediaSession.playbackState = 'playing'; } catch(e) {}
+                    }, 50);
+                }
+            });
+        } catch(e) {}
+        try {
+            navigator.mediaSession.setActionHandler('nexttrack', () => {
+                console.log('🎧 nexttrack');
+                self.onHeadphoneButton();
+            });
+        } catch(e) {}
+        try {
+            navigator.mediaSession.setActionHandler('previoustrack', () => {
+                console.log('🎧 previoustrack');
+                const now = Date.now();
+                if (now - self.lastAction < self.debounceMs) return;
+                self.lastAction = now;
+                movePrev();
+                vibrate(50);
+            });
+        } catch(e) {}
+        try {
+            navigator.mediaSession.setActionHandler('stop', () => {
+                console.log('🎧 stop');
+                AudioEngine.stop();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+            });
+        } catch(e) {}
+    },
+    updateMetadata() {
+        if (!('mediaSession' in navigator)) return;
+        try {
+            const pos = App.dkb ? getCurrentPosition() : null;
+            const title = pos
+                ? `رج ${pos.rowNum} • رنگ ${pos.color} • گره ${pos.start === pos.end ? pos.start : (pos.start + ' تا ' + pos.end)}`
+                : 'گره‌بان — نقشه‌خوان';
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: title,
+                artist: App.dkb && App.dkb.name ? App.dkb.name : 'نقشه فرش',
+                album: 'دکمه هدفون = گره بعدی 🎧',
+            });
+            try { navigator.mediaSession.playbackState = 'playing'; } catch(e) {}
+        } catch(e) {}
+    },
+    refresh() {
+        if (!this.active) return;
+        this.updateMetadata();
+        if (this.silentAudio && this.silentAudio.paused && Voice.enabled) this.silentAudio.play().catch(()=>{});
+    }
+};
+
+function startHeadphoneBridge() { HeadphoneBridge.start(); }
+function stopHeadphoneBridge() { HeadphoneBridge.stop(); }
+function updateHpBadge() {
+    const b = document.getElementById('hpBadge');
+    if (!b) return;
+    if (HeadphoneBridge.active && Voice.headphoneEnabled) b.classList.add('show');
+    else b.classList.remove('show');
+}
+function showHeadphoneHelp() { openModal('headphoneModal'); }
+function showAbout() { openModal('aboutModal'); }
+
+document.getElementById('audioFilesInput').addEventListener('change', async function(e) {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+    showLoader('در حال ذخیره فایل‌های صوتی...');
+    try {
+        const map = {};
+        for (const f of files) {
+            const name = f.name.replace(/\.(mp3|wav|ogg|m4a|aac|opus)$/i, '').trim();
+            map[name] = f;
+        }
+        await AudioStore.save(map);
+        await AudioStore.load();
+        AudioEngine.bufferCache = {};
+        hideLoader();
+        updateAudioFilesStatus();
+        showToast(`✅ ${files.length} فایل ذخیره شد`);
+        vibrate(60);
+    } catch (err) { hideLoader(); showToast('❌ خطا در ذخیره', true); }
+    e.target.value = '';
+});
+
+async function clearAudioFiles() {
+    if (!confirm('همه فایل‌های صوتی پاک شوند؟')) return;
+    await AudioStore.clear();
+    AudioEngine.bufferCache = {};
+    updateAudioFilesStatus();
+    showToast('🗑️ فایل‌ها پاک شدند');
+}
+
+function updateAudioFilesStatus() {
+    const box = document.getElementById('audioFilesStatus');
+    if (!box) return;
+    const have = AudioStore.count();
+    if (have === 0) {
+        box.className = 'voice-info-box warn';
+        box.innerHTML = `⚠️ هیچ فایل صوتی بارگذاری نشده.<br>روی «📁 انتخاب» بزنید.`;
+        return;
+    }
+    const numericKeys = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20',
+        '30','40','50','60','70','80','90','100','200','300','400','500','600','700','800','900','1000'];
+    const missingNums = numericKeys.filter(k => !AudioStore.files[k]);
+    const keywords = [
+        { name: 'رج', keys: ['raj','row'] },
+        { name: 'رنگ', keys: ['rang','color'] },
+        { name: 'گره', keys: ['ghereh','knot'] },
+        { name: 'تا', keys: ['ela','to'] },
+    ];
+    const missingWords = keywords.filter(kw => !kw.keys.some(k => AudioStore.files[k]));
+    let html = `<strong>📦 ${have} فایل</strong><br>`;
+    html += `✅ اعداد: ${numericKeys.length - missingNums.length} از ${numericKeys.length}<br>`;
+    if (missingNums.length > 0) html += `⚠️ غایب: <span style="color:#e74c3c;">${missingNums.join(', ')}</span><br>`;
+    if (missingWords.length > 0) html += `⚠️ کلمات غایب: <span style="color:#e74c3c;">${missingWords.map(w => w.name).join(', ')}</span>`;
+    else html += `✅ رج/رنگ/گره/تا کامل`;
+    const allOk = missingNums.length === 0 && missingWords.length === 0;
+    box.className = 'voice-info-box ' + (allOk ? 'ok' : 'warn');
+    box.innerHTML = html;
+}
+
+function openVoiceSettings() {
+    document.getElementById('voiceToggle').checked = Voice.enabled;
+    document.getElementById('hpToggle').checked = Voice.headphoneEnabled;
+    document.getElementById('voiceNumMode').value = Voice.numMode;
+    document.getElementById('voiceRate').value = Voice.rate;
+    document.getElementById('voiceRateVal').textContent = Voice.rate.toFixed(1);
+    document.getElementById('voiceSource').value = Voice.source;
+    updateSourcePanels();
+    updateAudioFilesStatus();
+    updateUnlockStatus();
+    openModal('voiceModal');
+}
+
+function updateSourcePanels() {
+    const src = document.getElementById('voiceSource').value;
+    document.getElementById('customAudioPanel').style.display = src === 'custom' ? 'block' : 'none';
+    document.getElementById('browserVoicePanel').style.display = src === 'browser' ? 'block' : 'none';
+}
+
+function testVoice() {
+    const w = Voice.enabled;
+    Voice.enabled = true;
+    Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+    speakCurrentSegment(true);
+    setTimeout(() => { Voice.enabled = w; if (!w) updateVoiceButton(); }, 100);
+}
+
+document.getElementById('voiceToggle').addEventListener('change', function() {
+    Voice.enabled = this.checked; updateVoiceButton(); saveVoiceSettings();
+    if (Voice.enabled) {
+        Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+        startHeadphoneBridge();
+        setTimeout(() => speakCurrentSegment(true), 100);
+    } else {
+        try { window.speechSynthesis.cancel(); } catch(e) {}
+        AudioEngine.stop();
+        stopHeadphoneBridge();
+    }
+});
+document.getElementById('hpToggle').addEventListener('change', function() {
+    Voice.headphoneEnabled = this.checked;
+    saveVoiceSettings();
+    updateHpBadge();
+    if (Voice.headphoneEnabled && Voice.enabled) startHeadphoneBridge();
+    else stopHeadphoneBridge();
+});
+document.getElementById('voiceSource').addEventListener('change', function() {
+    Voice.source = this.value; saveVoiceSettings(); updateSourcePanels();
+    Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+    if (Voice.enabled) setTimeout(() => speakCurrentSegment(true), 100);
+});
+document.getElementById('voiceNumMode').addEventListener('change', function() {
+    Voice.numMode = this.value; saveVoiceSettings();
+    Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+    if (Voice.enabled) speakCurrentSegment(true);
+});
+document.getElementById('voiceRate').addEventListener('input', function() {
+    Voice.rate = parseFloat(this.value);
+    document.getElementById('voiceRateVal').textContent = Voice.rate.toFixed(1);
+    saveVoiceSettings();
+});
+
+function autoColor(n) {
+    if (n === 0) return '#fff';
+    const hue = ((n * 137.508) % 360);
+    return `hsl(${hue.toFixed(0)}, ${62 + (n % 3) * 8}%, ${45 + (n % 2) * 12}%)`;
+}
+function colorFor(n) { return App.customColors[n] || autoColor(n); }
+function hexToRgb(c) {
+    if (c.startsWith('hsl')) {
+        const m = c.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+        if (m) {
+            const h = +m[1]/360, s = +m[2]/100, l = +m[3]/100;
+            const a = s * Math.min(l, 1-l);
+            const f = n => { const k = (n + h*12) % 12; return l - a * Math.max(-1, Math.min(k-3, 9-k, 1)); };
+            return [Math.round(f(0)*255), Math.round(f(8)*255), Math.round(f(4)*255)];
+        }
+    }
+    if (c.startsWith('#')) {
+        const h = c.slice(1);
+        return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)];
+    }
+    return [128,128,128];
+}
+
+function showToast(msg, isErr = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isErr ? ' err' : '');
+    clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2500);
+}
+function showLoader(m) { document.getElementById('loaderMsg').textContent = m || '...'; document.getElementById('loader').classList.add('show'); }
+function hideLoader() { document.getElementById('loader').classList.remove('show'); }
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function vibrate(ms) { if (navigator.vibrate) try { navigator.vibrate(ms); } catch(e) {} }
+function formatNum(n) { return n.toLocaleString('en-US'); }
+function toFa(n) { return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]); }
+
+function setupFirstTouchUnlock() {
+    const unlock = async () => {
+        await AudioEngine.unlock();
+        updateUnlockStatus();
+        if (Voice.enabled && Voice.headphoneEnabled && !HeadphoneBridge.active) HeadphoneBridge.start();
+    };
+    document.addEventListener('touchstart', unlock, { once: true, passive: true });
+    document.addEventListener('mousedown', unlock, { once: true });
+    document.addEventListener('keydown', unlock, { once: true });
+}
+
+/* ═══════════════════════════════════════════════
+   FILE LOADING
+   ═══════════════════════════════════════════════ */
+document.getElementById('btnLoad').addEventListener('click', () => document.getElementById('fileInput').click());
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const f = e.target.files[0]; if (!f) return;
+    loadFile(f, true); e.target.value = '';
+});
+
+function loadNewFile() { document.getElementById('fileInput').click(); }
+function changeDkb() { document.getElementById('fileInput').click(); }
+
+function loadFile(file, saveToStore = true) {
+    showLoader('در حال خواندن فایل...');
+    const r = new FileReader();
+    r.onload = async ev => {
+        try {
+            const buffer = ev.target.result;
+            const dkb = parseDKB(buffer);
+            if (dkb.rows.length === 0) throw new Error('هیچ رجی در فایل یافت نشد');
+
+            if (saveToStore) {
+                try {
+                    await DKBStore.saveFromBuffer(buffer.slice(0), file.name, file.size);
+                    console.log('💾 DKB saved to store');
+                } catch(err) { console.warn('💾 DKB save failed:', err); }
+            }
+
+            App.dkb = dkb;
+            App.fileKey = 'weaver14_' + file.name + '_' + file.size + '_' + dkb.totalRows + '_' + dkb.maxKnot;
+            App.customColors = loadCustomColors();
+            App.flipped = loadFlip();
+            App.ltr = loadLtr();
+            buildSegments();
+            computeRowStats();
+
+            const saved = loadPos();
+            App.currentSegIdx = (saved && saved.segIdx >= 0 && saved.segIdx < App.segs.length) ? saved.segIdx : 0;
+
+            showKnitView();
+            Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+            renderAll();
+            hideLoader();
+            showToast(`✅ ${dkb.totalRows} رج بارگذاری شد`);
+            vibrate(60);
+        } catch (err) {
+            hideLoader();
+            showToast('❌ خطا: ' + err.message, true);
+            alert('خطا:\n\n' + err.message);
+        }
+    };
+    r.onerror = () => { hideLoader(); showToast('❌ خطا در خواندن', true); };
+    r.readAsArrayBuffer(file);
+}
+
+async function useStoredDkb() {
+    showLoader('در حال بارگذاری نقشه ذخیره‌شده...');
+    try {
+        const stored = await DKBStore.load();
+        if (!stored) {
+            hideLoader();
+            showToast('⚠️ نقشه‌ای ذخیره نشده', true);
+            return;
+        }
+        const buffer = await stored.blob.arrayBuffer();
+        const dkb = parseDKB(buffer);
+        if (dkb.rows.length === 0) throw new Error('فایل ذخیره‌شده نامعتبر است');
+
+        App.dkb = dkb;
+        App.fileKey = 'weaver14_' + stored.meta.name + '_' + stored.meta.size + '_' + dkb.totalRows + '_' + dkb.maxKnot;
+        App.customColors = loadCustomColors();
+        App.flipped = loadFlip();
+        App.ltr = loadLtr();
+        buildSegments();
+        computeRowStats();
+
+        const saved = loadPos();
+        App.currentSegIdx = (saved && saved.segIdx >= 0 && saved.segIdx < App.segs.length) ? saved.segIdx : 0;
+
+        showKnitView();
+        Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+        renderAll();
+        hideLoader();
+        showToast(`✅ ${dkb.totalRows} رج بارگذاری شد`);
+        vibrate(60);
+    } catch (err) {
+        hideLoader();
+        showToast('❌ خطا: ' + err.message, true);
+    }
+}
+
+async function removeStoredDkb() {
+    if (!confirm('فایل DKB ذخیره‌شده حذف شود؟\n(فایل‌های صوتی و تنظیمات حذف نمی‌شوند)')) return;
+    await DKBStore.clear();
+    if (App.fileKey) {
+        try {
+            localStorage.removeItem(App.fileKey);
+            localStorage.removeItem(App.fileKey + '_colors');
+            localStorage.removeItem(App.fileKey + '_flip');
+            localStorage.removeItem(App.fileKey + '_ltr');
+        } catch(e) {}
+    }
+    App.dkb = null;
+    App.segs = [];
+    App.totalKnots = 0;
+    App.currentSegIdx = 0;
+
+    document.getElementById('welcomeScreen').style.display = 'flex';
+    document.getElementById('knitView').style.display = 'none';
+    document.getElementById('navMain').style.display = 'none';
+    document.getElementById('btnPalette').style.display = 'none';
+    document.getElementById('appTitle').textContent = 'نقشه‌خوان گره‌بان';
+    document.getElementById('appSub').textContent = 'نسخه ۱۴.۰';
+
+    updateStoredDkbBanner();
+    showToast('🗑️ فایل DKB حذف شد');
+}
+
+async function updateStoredDkbBanner() {
+    const box = document.getElementById('storedDkbBox');
+    const nameEl = document.getElementById('storedDkbName');
+    const stepsEl = document.getElementById('welcomeSteps');
+    const loadBtn = document.getElementById('btnLoad');
+
+    try {
+        const stored = await DKBStore.load();
+        if (stored) {
+            const sizeMB = (stored.meta.size / 1048576).toFixed(2);
+            nameEl.textContent = stored.meta.name + ' (' + sizeMB + ' MB)';
+            box.style.display = 'block';
+            stepsEl.style.display = 'none';
+            loadBtn.querySelector('span:last-child').textContent = 'بارگذاری نقشه جدید (جایگزین)';
+        } else {
+            box.style.display = 'none';
+            stepsEl.style.display = 'block';
+            loadBtn.querySelector('span:last-child').textContent = 'بارگذاری فایل DKB';
+        }
+    } catch(e) {
+        console.warn(e);
+        box.style.display = 'none';
+        stepsEl.style.display = 'block';
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   BUILD SEGMENTS
+   ═══════════════════════════════════════════════ */
+function buildSegments() {
+    const segs = [];
+    for (let ri = 0; ri < App.dkb.rows.length; ri++) {
+        const row = App.dkb.rows[ri];
+        const rowSegs = [];
+        row.colors.forEach(cd => {
+            cd.ranges.forEach(r => {
+                rowSegs.push({
+                    rowIdx: ri,
+                    rowNum: row.rowNum,
+                    color: cd.color,
+                    start: r[0],
+                    end: r[1],
+                    count: r[1] - r[0] + 1
+                });
+            });
+        });
+        rowSegs.sort((a, b) => {
+            if (a.color !== b.color) return a.color - b.color;
+            return App.ltr ? (b.start - a.start) : (a.start - b.start);
+        });
+        segs.push(...rowSegs);
+    }
+    App.segs = segs;
+    const cum = []; let run = 0;
+    for (const s of segs) { cum.push(run); run += s.count; }
+    App.segStartCum = cum;
+    App.totalKnots = run;
+    console.log('📋 Segments built:', segs.length, 'segments, order = color-primary');
+}
+
+function computeRowStats() {
+    App.rowStats = {};
+    for (const row of App.dkb.rows) {
+        let total = 0, maxK = 0;
+        for (const cd of row.colors) {
+            for (const r of cd.ranges) {
+                total += (r[1] - r[0] + 1);
+                if (r[1] > maxK) maxK = r[1];
+            }
+        }
+        App.rowStats[row.rowNum] = { totalKnotsInRow: total, maxKnotNum: maxK };
+    }
+}
+
+function getCurrentPosition() {
+    const seg = App.segs[App.currentSegIdx];
+    if (!seg) return null;
+    return { seg, rowNum: seg.rowNum, color: seg.color, start: seg.start, end: seg.end, count: seg.count, segIdx: App.currentSegIdx };
+}
+
+function showKnitView() {
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('knitView').style.display = 'flex';
+    document.getElementById('navMain').style.display = 'grid';
+    document.getElementById('btnPalette').style.display = 'flex';
+    document.getElementById('appTitle').textContent = App.dkb.name || 'نقشه بدون نام';
+    document.getElementById('appSub').textContent = App.dkb.totalRows + ' رج × ' + App.dkb.maxKnot + ' گره';
+}
+
+let lastRendered = { row: null, color: null, start: null, end: null };
+let activeInput = null;
+
+function renderAll() {
+    if (!App.dkb) return;
+    const pos = getCurrentPosition(); if (!pos) return;
+    renderFields(pos);
+    renderRowStats(pos);
+    renderProgress(pos);
+    updateNavButtons();
+    renderMapIfRowChanged(pos.rowNum);
+    HeadphoneBridge.refresh();
+    savePos();
+    speakCurrentSegment(false);
+}
+
+function renderRowStats(pos) {
+    const stat = App.rowStats[pos.rowNum];
+    if (!stat) return;
+    document.getElementById('statRow').textContent = toFa(pos.rowNum);
+    document.getElementById('statRowTot').textContent = 'از ' + toFa(App.dkb.totalRows);
+    let completedInRow = 0;
+    for (let i = 0; i <= pos.segIdx; i++) {
+        const s = App.segs[i];
+        if (s.rowNum === pos.rowNum) completedInRow += s.count;
+    }
+    document.getElementById('statKnot').textContent = toFa(completedInRow);
+    document.getElementById('statKnotTot').textContent = 'از ' + toFa(stat.totalKnotsInRow);
+    const totalBefore = App.segStartCum[pos.segIdx] + pos.count;
+    document.getElementById('statTotal').textContent = toFa(totalBefore) + ' / ' + toFa(App.totalKnots);
+}
+
+function renderFields(pos) {
+    const iR = document.getElementById('inputRow'), wR = document.getElementById('wrapRow');
+    document.getElementById('subRow').textContent = '/ ' + App.dkb.totalRows;
+    if (lastRendered.row !== pos.rowNum) {
+        if (activeInput !== iR) iR.value = pos.rowNum;
+        wR.classList.remove('changed'); void wR.offsetWidth; wR.classList.add('changed');
+    }
+    const iC = document.getElementById('inputColor'), wC = document.getElementById('wrapColor'), sw = document.getElementById('swatchColor');
+    if (lastRendered.color !== pos.color) {
+        if (activeInput !== iC) iC.value = pos.color;
+        const rgb = hexToRgb(colorFor(pos.color));
+        sw.style.background = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+        wC.classList.remove('changed'); void wC.offsetWidth; wC.classList.add('changed');
+    }
+    const iK = document.getElementById('inputKnot'), wK = document.getElementById('wrapKnot');
+    document.getElementById('subKnot').textContent = formatNum(pos.count) + ' گره';
+    if (lastRendered.start !== pos.start || lastRendered.end !== pos.end) {
+        if (activeInput !== iK) iK.value = pos.start === pos.end ? pos.start : (pos.start + '-' + pos.end);
+        wK.classList.remove('changed'); void wK.offsetWidth; wK.classList.add('changed');
+    }
+    lastRendered = { row: pos.rowNum, color: pos.color, start: pos.start, end: pos.end };
+}
+
+function renderProgress(pos) {
+    const before = App.segStartCum[pos.segIdx] + pos.count;
+    const pct = (before / App.totalKnots) * 100;
+    document.getElementById('progressFill').style.width = pct.toFixed(2) + '%';
+    document.getElementById('progLeft').textContent = toFa(before) + ' از ' + toFa(App.totalKnots) + ' گره';
+    document.getElementById('progRight').textContent = pct.toFixed(1) + '%';
+}
+
+function updateNavButtons() {
+    document.getElementById('btnPrev').disabled = App.currentSegIdx === 0;
+    document.getElementById('btnNext').disabled = App.currentSegIdx === App.segs.length - 1;
+    const pos = getCurrentPosition(); if (!pos) return;
+    document.getElementById('btnRowPrev').disabled = pos.rowNum <= App.dkb.rows[0].rowNum;
+    document.getElementById('btnRowNext').disabled = pos.rowNum >= App.dkb.rows[App.dkb.rows.length-1].rowNum;
+    document.getElementById('btnColorPrev').disabled = App.currentSegIdx === 0;
+    document.getElementById('btnColorNext').disabled = App.currentSegIdx === App.segs.length - 1;
+}
+
+let lastMapRowNum = null;
+function renderMapIfRowChanged(rn) {
+    if (lastMapRowNum === rn) return;
+    lastMapRowNum = rn; renderMap();
+}
+function renderMap() {
+    if (!App.dkb) return;
+    const canvas = document.getElementById('mapCanvas'), ctx = canvas.getContext('2d');
+    const W = App.dkb.maxKnot, H = App.dkb.totalRows;
+    const cont = document.getElementById('mapScroll');
+    const maxW = Math.max(200, (cont.clientWidth || window.innerWidth) - 8);
+    const maxH = Math.max(100, (cont.clientHeight || 200) - 8);
+    const sc = Math.min(maxW/W, maxH/H);
+    const dW = Math.max(40, Math.round(W * sc)), dH = Math.max(40, Math.round(H * sc));
+    canvas.width = W; canvas.height = H;
+    canvas.style.width = dW + 'px'; canvas.style.height = dH + 'px';
+    const imgData = ctx.createImageData(W, H);
+    const d = imgData.data;
+    for (let i = 0; i < d.length; i += 4) { d[i]=255; d[i+1]=255; d[i+2]=255; d[i+3]=255; }
+    const cache = {};
+    for (const row of App.dkb.rows) {
+        let y = App.flipped ? row.rowNum-1 : H - row.rowNum;
+        if (y < 0 || y >= H) continue;
+        for (const cd of row.colors) {
+            const cn = cd.color;
+            if (!cache[cn]) cache[cn] = hexToRgb(colorFor(cn));
+            const rgb = cache[cn];
+            for (const r of cd.ranges) {
+                const x1 = Math.max(0, r[0]-1), x2 = Math.min(W-1, r[1]-1);
+                for (let x = x1; x <= x2; x++) {
+                    const idx = (y*W + x)*4;
+                    d[idx]=rgb[0]; d[idx+1]=rgb[1]; d[idx+2]=rgb[2]; d[idx+3]=255;
+                }
+            }
+        }
+    }
+    ctx.putImageData(imgData, 0, 0);
+    const pos = getCurrentPosition(); if (!pos) return;
+    let curY = App.flipped ? pos.rowNum-1 : H - pos.rowNum;
+    if (curY >= 0 && curY < H) {
+        const lw = Math.max(1, Math.round(H/200));
+        ctx.strokeStyle = '#FF3B30'; ctx.lineWidth = lw;
+        ctx.strokeRect(0, curY - lw/2, W, lw);
+        ctx.fillStyle = 'rgba(255,59,48,0.4)';
+        ctx.fillRect(0, curY - 1, W, lw + 2);
+    }
+}
+
+function moveNext() {
+    if (App.currentSegIdx < App.segs.length - 1) {
+        App.currentSegIdx++; lastMapRowNum = null; renderAll(); vibrate(20);
+    } else showToast('🎉 آخرین گره بافته شد!');
+}
+function movePrev() {
+    if (App.currentSegIdx > 0) {
+        App.currentSegIdx--; lastMapRowNum = null; renderAll(); vibrate(20);
+    }
+}
+function moveRowNext() {
+    const cur = App.segs[App.currentSegIdx].rowNum;
+    for (let i = App.currentSegIdx + 1; i < App.segs.length; i++) {
+        if (App.segs[i].rowNum > cur) {
+            App.currentSegIdx = i; lastMapRowNum = null; renderAll(); vibrate(40); return;
+        }
+    }
+    showToast('آخرین رج هستید');
+}
+function moveRowPrev() {
+    const cur = App.segs[App.currentSegIdx].rowNum;
+    for (let i = App.currentSegIdx - 1; i >= 0; i--) {
+        if (App.segs[i].rowNum < cur) {
+            let j = i;
+            while (j > 0 && App.segs[j-1].rowNum === App.segs[i].rowNum) j--;
+            App.currentSegIdx = j; lastMapRowNum = null; renderAll(); vibrate(40); return;
+        }
+    }
+    showToast('اولین رج هستید');
+}
+document.getElementById('btnNext').addEventListener('click', moveNext);
+document.getElementById('btnPrev').addEventListener('click', movePrev);
+document.getElementById('btnRowNext').addEventListener('click', moveRowNext);
+document.getElementById('btnRowPrev').addEventListener('click', moveRowPrev);
+document.getElementById('btnColorNext').addEventListener('click', moveNext);
+document.getElementById('btnColorPrev').addEventListener('click', movePrev);
+
+(function() {
+    const inp = document.getElementById('inputRow');
+    inp.addEventListener('focus', () => { activeInput = inp; setTimeout(() => inp.select(), 10); });
+    inp.addEventListener('blur', () => { if (activeInput === inp) activeInput = null;
+        const p = getCurrentPosition(); if (inp.value.trim() === '' && p) inp.value = p.rowNum; });
+    inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); doSearchRow(); inp.blur(); }
+        else if (e.key === 'Escape') { const p = getCurrentPosition(); if (p) inp.value = p.rowNum; inp.blur(); }
+    });
+})();
+(function() {
+    const inp = document.getElementById('inputColor');
+    inp.addEventListener('focus', () => { activeInput = inp; setTimeout(() => inp.select(), 10); });
+    inp.addEventListener('blur', () => { if (activeInput === inp) activeInput = null;
+        const p = getCurrentPosition(); if (inp.value.trim() === '' && p) inp.value = p.color; });
+    inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); doSearchColor(); inp.blur(); }
+        else if (e.key === 'Escape') { const p = getCurrentPosition(); if (p) inp.value = p.color; inp.blur(); }
+    });
+})();
+(function() {
+    const inp = document.getElementById('inputKnot');
+    let saved = '';
+    inp.addEventListener('focus', () => { activeInput = inp; saved = inp.value; inp.value = ''; inp.placeholder = 'شماره گره...'; setTimeout(() => inp.select(), 10); });
+    inp.addEventListener('blur', () => { if (activeInput === inp) activeInput = null; inp.placeholder = 'جستجو...';
+        if (inp.value.trim() === '' || !/^\d+$/.test(inp.value.trim())) inp.value = saved; });
+    inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault();
+            const v = inp.value.trim();
+            if (/^\d+$/.test(v)) doSearchKnot(parseInt(v, 10));
+            else inp.value = saved;
+            inp.blur();
+        } else if (e.key === 'Escape') { inp.value = saved; inp.blur(); }
+    });
+})();
+
+function doSearchRow() {
+    const inp = document.getElementById('inputRow');
+    const n = parseInt(inp.value, 10);
+    if (isNaN(n) || n < 1 || n > App.dkb.totalRows) {
+        showToast('⚠️ شماره رج نامعتبر', true);
+        const p = getCurrentPosition(); if (p) inp.value = p.rowNum; return;
+    }
+    for (let i = 0; i < App.segs.length; i++) {
+        if (App.segs[i].rowNum >= n) {
+            App.currentSegIdx = i; lastMapRowNum = null; renderAll(); vibrate(40);
+            showToast('✅ رج ' + App.segs[i].rowNum); return;
+        }
+    }
+    App.currentSegIdx = App.segs.length - 1; lastMapRowNum = null; renderAll();
+}
+function doSearchColor() {
+    const inp = document.getElementById('inputColor');
+    const n = parseInt(inp.value, 10);
+    if (isNaN(n) || n < 1 || n > App.dkb.maxColor) {
+        showToast('⚠️ شماره رنگ نامعتبر', true);
+        const p = getCurrentPosition(); if (p) inp.value = p.color; return;
+    }
+    for (let i = App.currentSegIdx; i < App.segs.length; i++) {
+        if (App.segs[i].color === n) {
+            App.currentSegIdx = i; lastMapRowNum = null; renderAll(); vibrate(40);
+            showToast('✅ رنگ ' + n); return;
+        }
+    }
+    for (let i = 0; i < App.currentSegIdx; i++) {
+        if (App.segs[i].color === n) {
+            App.currentSegIdx = i; lastMapRowNum = null; renderAll(); vibrate(40);
+            showToast('✅ رنگ ' + n); return;
+        }
+    }
+    showToast('⚠️ پیدا نشد', true);
+    const p = getCurrentPosition(); if (p) inp.value = p.color;
+}
+function doSearchKnot(kn) {
+    const pos = getCurrentPosition(); if (!pos) return;
+    if (kn < 1 || kn > App.dkb.maxKnot) {
+        showToast('⚠️ نامعتبر', true);
+        const inp = document.getElementById('inputKnot');
+        inp.value = pos.start === pos.end ? pos.start : (pos.start + '-' + pos.end); return;
+    }
+    for (let i = 0; i < App.segs.length; i++) {
+        const s = App.segs[i];
+        if (s.rowNum === pos.rowNum && kn >= s.start && kn <= s.end) {
+            App.currentSegIdx = i; lastMapRowNum = null; renderAll(); vibrate(40);
+            showToast('✅ گره ' + kn); return;
+        }
+    }
+    for (let i = App.currentSegIdx; i < App.segs.length; i++) {
+        if (kn >= App.segs[i].start && kn <= App.segs[i].end) {
+            App.currentSegIdx = i; lastMapRowNum = null; renderAll(); vibrate(40);
+            showToast('✅ گره ' + kn); return;
+        }
+    }
+    for (let i = 0; i < App.currentSegIdx; i++) {
+        if (kn >= App.segs[i].start && kn <= App.segs[i].end) {
+            App.currentSegIdx = i; lastMapRowNum = null; renderAll(); vibrate(40);
+            showToast('✅ گره ' + kn); return;
+        }
+    }
+    showToast('⚠️ پیدا نشد', true);
+}
+
+document.addEventListener('keydown', e => {
+    if (!App.dkb || e.target.tagName === 'INPUT') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); moveNext(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); movePrev(); }
+});
+
+function toggleFlip() {
+    App.flipped = !App.flipped; saveFlip(); lastMapRowNum = null; renderMap();
+    showToast(App.flipped ? '🔄 چرخیده' : '✅ عادی'); vibrate(40);
+}
+function toggleLtr() {
+    const pos = getCurrentPosition(); if (!pos) return;
+    const sR = pos.rowNum, sC = pos.color, sS = pos.start;
+    App.ltr = !App.ltr; saveLtr(); buildSegments();
+    let fi = 0;
+    for (let i = 0; i < App.segs.length; i++) {
+        const s = App.segs[i];
+        if (s.rowNum === sR && s.color === sC && s.start === sS) { fi = i; break; }
+    }
+    App.currentSegIdx = fi; lastMapRowNum = null;
+    Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+    renderAll();
+    showToast(App.ltr ? 'چپ‌به‌راست' : 'راست‌به‌چپ');
+    vibrate(30);
+}
+
+document.getElementById('btnMenu').addEventListener('click', () => openModal('menuModal'));
+document.getElementById('btnVoice').addEventListener('click', async () => {
+    await AudioEngine.unlock();
+    toggleVoice();
+});
+
+let fullMapZoom = 1;
+function showFullMap() {
+    if (!App.dkb) return;
+    const canvas = document.getElementById('fullMapCanvas'), ctx = canvas.getContext('2d');
+    const W = App.dkb.maxKnot, H = App.dkb.totalRows;
+    canvas.width = W; canvas.height = H;
+    const imgData = ctx.createImageData(W, H); const d = imgData.data;
+    for (let i = 0; i < d.length; i += 4) { d[i]=255; d[i+1]=255; d[i+2]=255; d[i+3]=255; }
+    const cache = {};
+    for (const row of App.dkb.rows) {
+        let y = App.flipped ? row.rowNum-1 : H - row.rowNum;
+        if (y < 0 || y >= H) continue;
+        for (const cd of row.colors) {
+            const cn = cd.color;
+            if (!cache[cn]) cache[cn] = hexToRgb(colorFor(cn));
+            const rgb = cache[cn];
+            for (const r of cd.ranges) {
+                const x1 = Math.max(0, r[0]-1), x2 = Math.min(W-1, r[1]-1);
+                for (let x = x1; x <= x2; x++) {
+                    const idx = (y*W + x)*4;
+                    d[idx]=rgb[0]; d[idx+1]=rgb[1]; d[idx+2]=rgb[2]; d[idx+3]=255;
+                }
+            }
+        }
+    }
+    ctx.putImageData(imgData, 0, 0);
+    const pos = getCurrentPosition();
+    if (pos) {
+        let curY = App.flipped ? pos.rowNum-1 : H - pos.rowNum;
+        if (curY >= 0 && curY < H) {
+            const lw = Math.max(2, Math.ceil(H/100));
+            ctx.strokeStyle = '#FF3B30'; ctx.lineWidth = lw;
+            ctx.strokeRect(0, curY - lw/2, W, lw);
+        }
+    }
+    fullMapZoom = Math.min(3, Math.max(0.5, (window.innerWidth - 40) / W));
+    applyFullMapZoom();
+    document.getElementById('fullMap').classList.add('show');
+    if (pos) setTimeout(() => {
+        const body = document.getElementById('fmBody');
+        let curY = App.flipped ? pos.rowNum-1 : H - pos.rowNum;
+        body.scrollTop = Math.max(0, curY * fullMapZoom - body.clientHeight/2);
+    }, 50);
+}
+function applyFullMapZoom() {
+    const c = document.getElementById('fullMapCanvas');
+    c.style.width = Math.round(c.width * fullMapZoom) + 'px';
+    c.style.height = Math.round(c.height * fullMapZoom) + 'px';
+}
+function zoomFullMap(f) { fullMapZoom = Math.max(0.3, Math.min(5, fullMapZoom * f)); applyFullMapZoom(); }
+function closeFullMap() { document.getElementById('fullMap').classList.remove('show'); }
+
+function openPalette() {
+    if (!App.dkb) return;
+    const g = document.getElementById('paletteGrid'); g.innerHTML = '';
+    for (let n = 1; n <= App.dkb.maxColor; n++) {
+        const rgb = hexToRgb(colorFor(n));
+        const it = document.createElement('div'); it.className = 'pal-item';
+        it.innerHTML = `<div class="pal-swatch" style="background:rgb(${rgb[0]},${rgb[1]},${rgb[2]});"></div><div class="pal-num">رنگ ${n}</div>`;
+        it.addEventListener('click', () => editColor(n, it));
+        g.appendChild(it);
+    }
+    openModal('paletteModal');
+}
+function editColor(n, item) {
+    const inp = document.createElement('input'); inp.type = 'color';
+    const rgb = hexToRgb(colorFor(n));
+    inp.value = '#' + [rgb[0],rgb[1],rgb[2]].map(x => x.toString(16).padStart(2,'0')).join('');
+    inp.style.position = 'fixed'; inp.style.left = '-1000px';
+    document.body.appendChild(inp);
+    inp.addEventListener('change', () => {
+        App.customColors[n] = inp.value; saveCustomColors();
+        item.querySelector('.pal-swatch').style.background = inp.value;
+        lastRendered = { row: null, color: null, start: null, end: null };
+        lastMapRowNum = null; renderAll();
+        showToast('✅ رنگ ' + n);
+        document.body.removeChild(inp);
+    });
+    inp.addEventListener('cancel', () => document.body.removeChild(inp));
+    inp.click();
+}
+function resetPaletteColors() {
+    if (!confirm('رنگ‌ها بازنشانی شوند؟')) return;
+    App.customColors = {}; saveCustomColors(); openPalette();
+    lastRendered = { row: null, color: null, start: null, end: null };
+    lastMapRowNum = null; renderAll();
+}
+document.getElementById('btnPalette').addEventListener('click', openPalette);
+
+function resetProgress() {
+    if (!App.dkb) return;
+    if (!confirm('از رج ۱ شروع شود؟')) return;
+    App.currentSegIdx = 0;
+    lastRendered = { row: null, color: null, start: null, end: null };
+    lastMapRowNum = null;
+    Voice.lastSpoken = { row: null, color: null, start: null, end: null };
+    renderAll();
+    showToast('↩️ به رج اول');
+}
+
+function savePos(){try{localStorage.setItem(App.fileKey, String(App.currentSegIdx));}catch(e){}}
+function loadPos(){try{const v=localStorage.getItem(App.fileKey);return v?{segIdx:parseInt(v,10)}:null;}catch(e){return null;}}
+function loadCustomColors(){try{const v=localStorage.getItem(App.fileKey+'_colors');return v?JSON.parse(v):{};}catch(e){return {};}}
+function saveCustomColors(){try{localStorage.setItem(App.fileKey+'_colors',JSON.stringify(App.customColors));}catch(e){}}
+function loadFlip(){try{return localStorage.getItem(App.fileKey+'_flip')==='1';}catch(e){return false;}}
+function saveFlip(){try{localStorage.setItem(App.fileKey+'_flip',App.flipped?'1':'0');}catch(e){}}
+function loadLtr(){try{return localStorage.getItem(App.fileKey+'_ltr')==='1';}catch(e){return false;}}
+function saveLtr(){try{localStorage.setItem(App.fileKey+'_ltr',App.ltr?'1':'0');}catch(e){}}
+
+/* ═══════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════ */
+initVoices();
+loadVoiceSettings();
+updateVoiceButton();
+updateHpBadge();
+setupFirstTouchUnlock();
+
+window.addEventListener('load', () => {
+    // تشخیص: اگر file:// یا https بدون standalone
+    if (!Env.isStandalone) {
+        if (Env.isHttps) {
+            // در HTTPS منتظر beforeinstallprompt می‌مانیم
+            // اگر بعد از ۳ ثانیه نیامد، دکمه را نشان بده
+            setTimeout(() => {
+                if (!deferredInstallPrompt) showInstallUI();
+            }, 3000);
+        } else if (Env.isFile) {
+            // در file:// دکمه را نشان بده و بنر راهنما
+            showInstallUI();
+            setTimeout(showFileModeBanner, 2500);
+        }
+    }
+});
+
+(async () => {
+    try {
+        await AudioStore.load();
+        if (AudioStore.count() > 0) console.log('🎵 بارگذاری شد:', AudioStore.count(), 'فایل صوتی');
+        updateAudioFilesStatus();
+    } catch(e) { console.warn('audio load', e); }
+
+    await updateStoredDkbBanner();
+})();
+
+window.addEventListener('beforeunload', () => { saveVoiceSettings(); savePos(); });
+let rzT; window.addEventListener('resize', () => {
+    if (!App.dkb) return;
+    clearTimeout(rzT);
+    rzT = setTimeout(() => { lastMapRowNum = null; renderMap(); }, 250);
+});
+
+console.log('🧶 نقشه‌خوان گره‌بان — نسخه ۱۴.۰ (نصب هوشمند + DKB Store)');
+</script>
+</body>
+</html>
