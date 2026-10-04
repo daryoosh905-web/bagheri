@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="گره‌بان">
 <meta name="application-name" content="گره‌بان">
 <meta name="description" content="نقشه‌خوان فرش برای بافندگان — با پشتیبانی صوتی">
-<link rel="manifest" href='data:application/manifest+json,{"name":"نقشه‌خوان گره‌بان","short_name":"گره‌بان","description":"نقشه‌خوان فرش برای بافندگان","start_url":".","scope":".","display":"standalone","orientation":"portrait","background_color":"%230d1b2a","theme_color":"%231a5490","lang":"fa","dir":"rtl","icons":[{"src":"data:image/svg%2Bxml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22%3E%3Crect width=%22192%22 height=%22192%22 rx=%2236%22 fill=%22%231a5490%22/%3E%3Ctext x=%2296%22 y=%22130%22 font-size=%22110%22 text-anchor=%22middle%22%3E%F0%9F%A7%B6%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml","purpose":"any maskable"},{"src":"data:image/svg%2Bxml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 rx=%2296%22 fill=%22%231a5490%22/%3E%3Ctext x=%22256%22 y=%22350%22 font-size=%22300%22 text-anchor=%22middle%22%3E%F0%9F%A7%B6%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]}'>
+<link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="%231a5490"/><text x="96" y="130" font-size="110" text-anchor="middle">🧶</text></svg>'>
 <link rel="apple-touch-icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="36" fill="%231a5490"/><text x="96" y="130" font-size="110" text-anchor="middle">🧶</text></svg>'>
 <title>نقشه‌خوان گره‌بان</title>
@@ -150,6 +150,7 @@ canvas{display:block;image-rendering:pixelated;border-radius:4px;}
 .headphone-badge.show{display:flex;}
 @keyframes badgePulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
 @keyframes slideUpBanner{from{transform:translateY(100%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+#onlineIndicator{font-size:16px;padding:0 6px;flex-shrink:0;transition:opacity 0.3s;}
 @media (max-height:640px){.map-panel{height:22vh;max-height:160px;}.field-input-wrap input{font-size:22px;}.field-input-wrap.knot-f input{font-size:20px;}.nav-btn{min-height:48px;font-size:18px;}.field-input-wrap{min-height:48px;}.nav-main button{min-height:46px;padding:10px 6px;font-size:13px;}}
 </style>
 </head>
@@ -160,8 +161,9 @@ canvas{display:block;image-rendering:pixelated;border-radius:4px;}
 <div class="logo">🧶</div>
 <div class="meta">
 <div class="title" id="appTitle">نقشه‌خوان گره‌بان</div>
-<div class="subtitle" id="appSub">نسخه ۱۴.۰</div>
+<div class="subtitle" id="appSub">نسخه ۱۵.۰</div>
 </div>
+<span id="onlineIndicator" title="آنلاین">🌐</span>
 <button class="btn-ico" id="btnVoice" title="صدا">🔇</button>
 <button class="btn-ico" id="btnPalette" style="display:none;">🎨</button>
 <button class="btn-ico" id="btnMenu">☰</button>
@@ -369,11 +371,12 @@ canvas{display:block;image-rendering:pixelated;border-radius:4px;}
 <div class="modal-content">
 <h2>ℹ️ درباره</h2>
 <div style="font-size:12px;line-height:2;color:#b0c2d6;">
-<p><strong>نقشه‌خوان گره‌بان — نسخه ۱۴.۰</strong></p>
+<p><strong>نقشه‌خوان گره‌بان — نسخه ۱۵.۰</strong></p>
 <p>اپلیکیشن نقشه‌خوان فرش برای بافندگان.</p>
 <p>با پشتیبانی از:
 <br>• نصب روی صفحه اصلی گوشی
 <br>• ذخیره دائمی فایل DKB
+<br>• بارگذاری خودکار در آفلاین
 <br>• پخش صوتی با فایل‌های شخصی
 <br>• کنترل با دکمه هدفون
 <br>• ذخیره خودکار موقعیت بافتن</p>
@@ -484,45 +487,11 @@ function openAutoInstallGuide() {
                 <strong style="font-size:14px;display:block;margin-bottom:6px;">⚠️ محدودیت فنی</strong>
                 Chrome اندروید <strong>گزینه «افزودن به صفحه اصلی»</strong> را برای فایل‌های محلی
                 (<code style="background:#000;padding:1px 4px;border-radius:3px;">file://</code>) نمایش نمی‌دهد.
-                این محدودیت برای امنیت شماست و مرورگر آن را عمدی پنهان کرده است.
             </div>
-
-            <div style="background:#0f3620;border:2px solid #2ecc71;border-radius:10px;padding:14px;margin-bottom:14px;line-height:2;">
-                <strong style="color:#2ecc71;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل ۱: استفاده از Opera (ساده‌ترین)</strong>
-                <ol style="padding-right:20px;padding-left:0;margin-bottom:10px;">
-                    <li>روی دکمه زیر بزنید و Opera را نصب کنید</li>
-                    <li>فایل <code style="background:#000;padding:1px 4px;border-radius:3px;">weaver.html</code> را در Opera باز کنید</li>
-                    <li>منوی سه‌نقطه Opera → <strong>Add to Home screen</strong></li>
-                </ol>
-                <a href="https://play.google.com/store/apps/details?id=com.opera.browser" target="_blank" style="display:inline-block;width:100%;text-align:center;background:linear-gradient(135deg,#cc0000,#e74c3c);color:#fff;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:14px;box-sizing:border-box;">
-                    📥 نصب Opera از Google Play
-                </a>
-            </div>
-
-            <div style="background:#0f2536;border:2px solid #3498db;border-radius:10px;padding:14px;margin-bottom:14px;line-height:2;">
-                <strong style="color:#5dade2;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل ۲: تغییر به HTTPS (تضمینی)</strong>
-                <p style="font-size:12px;color:#b0c2d6;margin-bottom:10px;">
-                    فایل را روی یک هاست رایگان بگذارید تا Chrome گزینه نصب را نشان دهد:
-                </p>
-                <ol style="padding-right:20px;padding-left:0;font-size:12px;">
-                    <li>به <code style="background:#000;padding:1px 4px;border-radius:3px;">app.netlify.com/drop</code> بروید</li>
-                    <li>پوشه حاوی <code style="background:#000;padding:1px 4px;border-radius:3px;">weaver.html</code> را رها کنید</li>
-                    <li>لینک HTTPS را روی گوشی باز کنید</li>
-                    <li>حالا دکمه «نصب» خودکار ظاهر می‌شود</li>
-                </ol>
-            </div>
-
-            <div style="background:#3a2b0f;border:2px solid #f39c12;border-radius:10px;padding:14px;line-height:2;">
-                <strong style="color:#ffd166;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل ۳: ساخت Bookmark دستی</strong>
-                <ol style="padding-right:20px;padding-left:0;font-size:12px;">
-                    <li>در Chrome، این صفحه را باز کنید</li>
-                    <li>روی ستاره ⭐ در نوار آدرس بزنید</li>
-                    <li>در <strong>Mobile bookmarks</strong> ذخیره کنید</li>
-                    <li>در صفحه اصلی گوشی، Widget از Chrome Bookmarks بسازید</li>
-                </ol>
-                <button onclick="copyCurrentUrl()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;padding:10px;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:bold;cursor:pointer;">
-                    📋 کپی لینک فعلی
-                </button>
+            <div style="background:#0f2536;border:2px solid #3498db;border-radius:10px;padding:14px;line-height:2;">
+                <strong style="color:#5dade2;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل: استفاده از نسخه آنلاین</strong>
+                <p style="font-size:12px;color:#b0c2d6;margin-bottom:10px;">از آدرس GitHub Pages استفاده کنید:</p>
+                <div style="background:#000;padding:8px;border-radius:6px;font-family:monospace;font-size:11px;direction:ltr;word-break:break-all;color:#5dade2;">https://daryoosh905-web.github.io/bagheri/</div>
             </div>
         `;
     } else if (Env.isFile && Env.isOpera) {
@@ -546,8 +515,7 @@ function openAutoInstallGuide() {
             <div style="background:#0f2536;border:2px solid #3498db;border-radius:10px;padding:14px;line-height:2;">
                 <strong style="color:#5dade2;font-size:14px;display:block;margin-bottom:10px;">✅ راه‌حل:</strong>
                 <ol style="padding-right:20px;padding-left:0;">
-                    <li>فایل را روی هاست HTTPS بگذارید (Netlify)</li>
-                    <li>لینک را در Safari باز کنید</li>
+                    <li>آدرس GitHub Pages را در Safari باز کنید</li>
                     <li>دکمه <strong>Share</strong> → <strong>Add to Home Screen</strong></li>
                 </ol>
             </div>
@@ -561,14 +529,11 @@ function openAutoInstallGuide() {
                     <li><strong>New → Shortcut</strong></li>
                     <li>در فیلد Location این را وارد کنید:
                         <div style="background:#000;padding:8px;border-radius:6px;font-family:monospace;font-size:11px;direction:ltr;margin-top:6px;word-break:break-all;color:#5dade2;">
-                            "chrome.exe" --app=file:///<span id="filePathDisplay">${location.pathname}</span>
+                            "chrome.exe" --app=${location.href}
                         </div>
                     </li>
                     <li>روی <strong>Next</strong> و بعد <strong>Finish</strong> بزنید</li>
                 </ol>
-                <button onclick="copyForDesktop()" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;padding:10px;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:bold;cursor:pointer;">
-                    📋 کپی دستور برای دسکتاپ
-                </button>
             </div>
         `;
     } else {
@@ -588,73 +553,24 @@ function openAutoInstallGuide() {
     openModal('installModal');
 }
 
-function copyCurrentUrl() {
-    const url = location.href;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(
-            () => showToast('✅ لینک کپی شد'),
-            () => fallbackCopy(url)
-        );
+/* ═══════════════════════════════════════════════
+   ONLINE/OFFLINE INDICATOR ⭐
+   ═══════════════════════════════════════════════ */
+function updateOnlineIndicator() {
+    const ind = document.getElementById('onlineIndicator');
+    if (!ind) return;
+    if (navigator.onLine) {
+        ind.textContent = '🌐';
+        ind.title = 'آنلاین';
+        ind.style.opacity = '1';
     } else {
-        fallbackCopy(url);
+        ind.textContent = '📴';
+        ind.title = 'آفلاین — حالت ذخیره';
+        ind.style.opacity = '0.85';
     }
 }
-
-function copyForDesktop() {
-    const cmd = `"chrome.exe" --app=${location.href}`;
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(cmd).then(
-            () => showToast('✅ دستور کپی شد'),
-            () => fallbackCopy(cmd)
-        );
-    } else {
-        fallbackCopy(cmd);
-    }
-}
-
-function fallbackCopy(text) {
-    try {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.left = '-1000px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('✅ کپی شد');
-    } catch(e) { showToast('❌ کپی نشد', true); }
-}
-
-function showFileModeBanner() {
-    if (sessionStorage.getItem('file_banner_dismissed') === '1') return;
-    if (document.getElementById('fileModeBanner')) return;
-
-    const banner = document.createElement('div');
-    banner.id = 'fileModeBanner';
-    banner.style.cssText = `
-        position:fixed;bottom:0;left:0;right:0;
-        background:linear-gradient(135deg,#8e44ad,#9b59b6);
-        color:#fff;padding:14px 16px;
-        box-shadow:0 -4px 20px rgba(0,0,0,0.4);
-        z-index:1000;font-size:13px;line-height:1.7;
-        display:flex;flex-direction:column;gap:10px;
-        animation:slideUpBanner 0.4s ease-out;
-    `;
-    banner.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
-            <div style="flex:1;">
-                <strong style="font-size:14px;">📱 می‌خواهید روی صفحه اصلی نصب شود؟</strong><br>
-                <span style="opacity:0.9;font-size:12px;">راهنمای گام‌به‌گام برای نصب آسان</span>
-            </div>
-            <button onclick="document.getElementById('fileModeBanner').remove();sessionStorage.setItem('file_banner_dismissed','1');" style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;font-family:inherit;padding:0;line-height:1;flex-shrink:0;">✕</button>
-        </div>
-        <button onclick="openAutoInstallGuide();document.getElementById('fileModeBanner').remove();sessionStorage.setItem('file_banner_dismissed','1');" style="width:100%;background:#fff;color:#8e44ad;border:none;padding:12px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:bold;cursor:pointer;">
-            🎯 نمایش راهنمای نصب
-        </button>
-    `;
-    document.body.appendChild(banner);
-}
+window.addEventListener('online', updateOnlineIndicator);
+window.addEventListener('offline', updateOnlineIndicator);
 
 /* ═══════════════════════════════════════════════
    DKB PARSER
@@ -1431,16 +1347,42 @@ function setupFirstTouchUnlock() {
 }
 
 /* ═══════════════════════════════════════════════
-   FILE LOADING
+   ⭐ FILE LOADING با تشخیص آفلاین
    ═══════════════════════════════════════════════ */
-document.getElementById('btnLoad').addEventListener('click', () => document.getElementById('fileInput').click());
+document.getElementById('btnLoad').addEventListener('click', async () => {
+    // ⭐ اگر آفلاین هستیم
+    if (!navigator.onLine) {
+        const stored = await DKBStore.load();
+        if (stored) {
+            // DKB ذخیره شده — استفاده کن
+            showToast('📴 آفلاین — استفاده از نقشه ذخیره‌شده');
+            useStoredDkb();
+            return;
+        }
+        // آفلاین و بدون DKB
+        showToast('⚠️ برای بارگذاری نقشه جدید اینترنت لازم است', true);
+        setTimeout(() => {
+            alert('برای بارگذاری نقشه جدید نیاز به اینترنت است.\n\nلطفاً:\n۱. اینترنت را روشن کن\n۲. فایل DKB را یک بار بارگذاری کن\n۳. از این به بعد آفلاین هم کار می‌کند');
+        }, 500);
+        return;
+    }
+    // آنلاین — پنجره انتخاب فایل باز کن
+    document.getElementById('fileInput').click();
+});
+
 document.getElementById('fileInput').addEventListener('change', function(e) {
     const f = e.target.files[0]; if (!f) return;
     loadFile(f, true); e.target.value = '';
 });
 
 function loadNewFile() { document.getElementById('fileInput').click(); }
-function changeDkb() { document.getElementById('fileInput').click(); }
+function changeDkb() {
+    if (!navigator.onLine) {
+        showToast('⚠️ برای بارگذاری نقشه جدید اینترنت لازم است', true);
+        return;
+    }
+    document.getElementById('fileInput').click();
+}
 
 function loadFile(file, saveToStore = true) {
     showLoader('در حال خواندن فایل...');
@@ -1459,7 +1401,7 @@ function loadFile(file, saveToStore = true) {
             }
 
             App.dkb = dkb;
-            App.fileKey = 'weaver14_' + file.name + '_' + file.size + '_' + dkb.totalRows + '_' + dkb.maxKnot;
+            App.fileKey = 'weaver15_' + file.name + '_' + file.size + '_' + dkb.totalRows + '_' + dkb.maxKnot;
             App.customColors = loadCustomColors();
             App.flipped = loadFlip();
             App.ltr = loadLtr();
@@ -1499,7 +1441,7 @@ async function useStoredDkb() {
         if (dkb.rows.length === 0) throw new Error('فایل ذخیره‌شده نامعتبر است');
 
         App.dkb = dkb;
-        App.fileKey = 'weaver14_' + stored.meta.name + '_' + stored.meta.size + '_' + dkb.totalRows + '_' + dkb.maxKnot;
+        App.fileKey = 'weaver15_' + stored.meta.name + '_' + stored.meta.size + '_' + dkb.totalRows + '_' + dkb.maxKnot;
         App.customColors = loadCustomColors();
         App.flipped = loadFlip();
         App.ltr = loadLtr();
@@ -1542,12 +1484,13 @@ async function removeStoredDkb() {
     document.getElementById('navMain').style.display = 'none';
     document.getElementById('btnPalette').style.display = 'none';
     document.getElementById('appTitle').textContent = 'نقشه‌خوان گره‌بان';
-    document.getElementById('appSub').textContent = 'نسخه ۱۴.۰';
+    document.getElementById('appSub').textContent = 'نسخه ۱۵.۰';
 
     updateStoredDkbBanner();
     showToast('🗑️ فایل DKB حذف شد');
 }
 
+/* ⭐⭐⭐ تابع بارگذاری خودکار در شروع ⭐⭐⭐ */
 async function updateStoredDkbBanner() {
     const box = document.getElementById('storedDkbBox');
     const nameEl = document.getElementById('storedDkbName');
@@ -1562,6 +1505,12 @@ async function updateStoredDkbBanner() {
             box.style.display = 'block';
             stepsEl.style.display = 'none';
             loadBtn.querySelector('span:last-child').textContent = 'بارگذاری نقشه جدید (جایگزین)';
+
+            // ⭐ بارگذاری خودکار DKB ذخیره‌شده
+            console.log('💾 DKB ذخیره‌شده پیدا شد — بارگذاری خودکار...');
+            setTimeout(() => {
+                useStoredDkb();
+            }, 400);
         } else {
             box.style.display = 'none';
             stepsEl.style.display = 'block';
@@ -1605,7 +1554,7 @@ function buildSegments() {
     for (const s of segs) { cum.push(run); run += s.count; }
     App.segStartCum = cum;
     App.totalKnots = run;
-    console.log('📋 Segments built:', segs.length, 'segments, order = color-primary');
+    console.log('📋 Segments built:', segs.length);
 }
 
 function computeRowStats() {
@@ -2046,20 +1995,16 @@ loadVoiceSettings();
 updateVoiceButton();
 updateHpBadge();
 setupFirstTouchUnlock();
+updateOnlineIndicator();
 
 window.addEventListener('load', () => {
-    // تشخیص: اگر file:// یا https بدون standalone
     if (!Env.isStandalone) {
         if (Env.isHttps) {
-            // در HTTPS منتظر beforeinstallprompt می‌مانیم
-            // اگر بعد از ۳ ثانیه نیامد، دکمه را نشان بده
             setTimeout(() => {
                 if (!deferredInstallPrompt) showInstallUI();
             }, 3000);
         } else if (Env.isFile) {
-            // در file:// دکمه را نشان بده و بنر راهنما
             showInstallUI();
-            setTimeout(showFileModeBanner, 2500);
         }
     }
 });
@@ -2071,6 +2016,7 @@ window.addEventListener('load', () => {
         updateAudioFilesStatus();
     } catch(e) { console.warn('audio load', e); }
 
+    // ⭐ بارگذاری خودکار DKB (با تأخیر کوتاه)
     await updateStoredDkbBanner();
 })();
 
@@ -2081,17 +2027,7 @@ let rzT; window.addEventListener('resize', () => {
     rzT = setTimeout(() => { lastMapRowNum = null; renderMap(); }, 250);
 });
 
-console.log('🧶 نقشه‌خوان گره‌بان — نسخه ۱۴.۰ (نصب هوشمند + DKB Store)');
+console.log('🧶 نقشه‌خوان گره‌بان — نسخه ۱۵.۰ (بارگذاری خودکار + تشخیص آفلاین)');
 </script>
-   <script>
-if ('serviceWorker' in navigator && location.protocol === 'https:') {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('✅ SW registered'))
-            .catch(err => console.warn('❌ SW failed:', err.message));
-    });
-}
-</script>
-   
 </body>
 </html>
